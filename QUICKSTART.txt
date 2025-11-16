@@ -1,0 +1,68 @@
+==========================================
+   MianPix - Image Editor
+   Quick Start Guide
+==========================================
+
+Your project is ready! Follow these steps:
+
+STEP 1: Install Dependencies
+-----------------------------
+Open PowerShell/Terminal in this folder and run:
+
+    npm install
+
+This will download all required packages.
+
+
+STEP 2: Start the Development Server
+-------------------------------------
+After installation completes, run:
+
+    npm start
+
+The app will automatically open in your browser at:
+http://localhost:3000
+
+
+STEP 3: Test the Application
+-----------------------------
+1. Click "Start Editing" or go to the Tool page
+2. Upload an image (drag-drop or click to browse)
+3. Try the editing features:
+   - Rotate, Flip, Crop
+   - Resize dimensions
+   - Adjust quality
+   - Download in different formats
+
+
+PROJECT FILES
+=============
+- README.md          - Project overview
+- SETUP.md           - Detailed setup instructions
+- PROJECT_SUMMARY.md - Complete feature list
+- TODO.md            - Original checklist
+
+
+NEED HELP?
+==========
+Check SETUP.md for troubleshooting tips.
+
+Common issues:
+- If port 3000 is busy, the app will use another port
+- Make sure Node.js is installed (v14 or higher)
+- Internet connection needed for initial npm install
+
+
+WHAT'S INCLUDED
+===============
+✅ Image upload (device, URL, drag-drop)
+✅ Crop, Resize, Rotate, Flip
+✅ Compression quality control
+✅ Export as PNG, JPG, WEBP
+✅ Dark/Light theme
+✅ Responsive design
+✅ Privacy-first (no server uploads)
+
+
+Ready to go! Run: npm install
+==========================================

@@ -1,0 +1,103 @@
+.about {
+  padding: 3rem 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  color: #333;
+}
+
+.about-container h1 {
+  font-size: 2.5rem;
+  color: #007bff;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.about-container p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #555;
+}
+
+.tech-stack {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.tech-stack h2 {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  color: #007bff;
+}
+
+.tech-icons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.tech-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s;
+}
+
+.tech-item:hover {
+  transform: translateY(-5px);
+}
+
+.tech-item span {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #555;
+}
+
+.features-list h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #007bff;
+}
+
+.features-list ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  max-width: 700px;
+  margin: 0 auto;
+  color: #555;
+}
+
+.features-list li {
+  margin-bottom: 0.8rem;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .tech-icons {
+    gap: 1.5rem;
+  }
+
+  .about-container h1 {
+    font-size: 2rem;
+  }
+
+  .features-list ul {
+    padding-left: 1rem;
+  }
+}
+
+/* Dark mode support */
+body.dark .about {
+  color: #ccc;
+}
+
+body.dark .about-container p,
+body.dark .features-list li,
+body.dark .tech-item span {
+  color: #aaa;
+}

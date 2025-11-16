@@ -1,0 +1,110 @@
+/* Navbar base styles */
+.navbar {
+  display: flex;
+  justify-content: space-between; /* ensures left & right alignment */
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: var(--shadow-small);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between; /* logo left, menu right */
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.navbar-logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+/* Menu on the right */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem; /* space between menu and toggle */
+}
+
+/* Navbar menu links */
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.navbar-menu li a {
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: opacity 0.3s, color 0.3s;
+}
+
+.navbar-menu li a:hover {
+  color: var(--color-primary);
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  width: 60px;
+  height: 30px;
+  border-radius: 15px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #007bff, #0056b3); /* Light theme gradient */
+  justify-content: flex-start;
+}
+
+.navbar.dark .theme-toggle {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed); /* Dark theme gradient */
+  justify-content: flex-end;
+}
+
+.theme-toggle span {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+.theme-toggle span svg {
+  width: 16px;
+  height: 16px;
+  transition: color 0.3s;
+  color: #fbbf24; /* sun color default */
+}
+
+.navbar.dark .theme-toggle span svg {
+  color: #a5b4fc; /* moon color */
+}
+
+.theme-toggle:hover span {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.35), 0 0 8px rgba(255,255,255,0.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar-menu {
+    gap: 1rem;
+  }
+
+  .navbar-menu li a {
+    font-size: 0.9rem;
+  }
+}

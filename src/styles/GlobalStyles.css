@@ -1,0 +1,124 @@
+:root {
+  --color-primary: #4f46e5;       /* Indigo */
+  --color-primary-hover: #6366f1; /* Lighter Indigo */
+  --color-success: #10b981;       /* Emerald */
+  --color-danger: #ef4444;        /* Red */
+  --color-warning: #facc15;       /* Amber */
+  --color-info: #3b82f6;          /* Blue */
+  --color-background: #f9fafb;    /* Very light gray */
+  --color-surface: #ffffff;       /* Card background */
+  --color-text: #111827;          /* Dark gray */
+  --color-text-secondary: #6b7280;/* Medium gray */
+  --color-border: #e5e7eb;        /* Light border */
+}
+
+.dark {
+  --color-primary: #8b5cf6;       /* Violet */
+  --color-primary-hover: #a78bfa; /* Lighter violet */
+  --color-success: #22c55e;       /* Green */
+  --color-danger: #f87171;        /* Red */
+  --color-warning: #fbbf24;       /* Amber */
+  --color-info: #3b82f6;          /* Blue */
+  --color-background: #111827;    /* Dark blue/gray */
+  --color-surface: #1f2937;       /* Card surface dark */
+  --color-text: #f9fafb;          /* Light text */
+  --color-text-secondary: #d1d5db;/* Secondary text */
+  --color-border: #374151;        /* Border dark */
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+/* Glass Effect Utility */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Smooth Transitions */
+.transition {
+  transition: all var(--transition-normal);
+}
+
+/* Button Styles */
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--radius-small);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-weight: 500;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+}
+
+/* Scroll Bar Styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: var(--radius-small);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-hover);
+}
+
+/* Loading Animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading {
+  animation: spin 1s linear infinite;
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}

@@ -1,0 +1,39 @@
+.app {
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.app.light {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.app.dark {
+  background-color: #1a1a1a;
+  color: #f5f5f5;
+}
+
+.app.dark h1,
+.app.dark h2,
+.app.dark h3,
+.app.dark p {
+  color: #f5f5f5;
+}
+
+.app.dark input,
+.app.dark textarea,
+.app.dark select {
+  background-color: #2a2a2a;
+  color: #f5f5f5;
+  border-color: #444;
+}
+
+.app.dark button {
+  background-color: #2a2a2a;
+  color: #f5f5f5;
+  border-color: #444;
+}
+
+.app.dark button:hover {
+  background-color: #3a3a3a;
+}

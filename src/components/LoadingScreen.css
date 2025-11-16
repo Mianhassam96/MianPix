@@ -1,0 +1,36 @@
+/* src/components/LoadingScreen.css */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8,8,10,0.6);
+  z-index: 9999;
+}
+.loading-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 28px;
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+  background: rgba(255,255,255,0.04);
+  color: #fff;
+}
+.spinner {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 4px solid rgba(255,255,255,0.12);
+  border-top-color: rgba(255,255,255,0.9);
+  animation: spin 1s linear infinite;
+}
+.loading-message {
+  font-size: 14px;
+  opacity: 0.95;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

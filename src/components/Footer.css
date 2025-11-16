@@ -1,0 +1,14 @@
+.footer {
+  padding: 18px 24px;
+  text-align: center;
+  opacity: 0.9;
+  transition: background-color 0.3s, color 0.3s;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: var(--shadow-small);
+}
+
+.footer.dark {
+  background-color: var(--color-surface); /* uses dark theme surface color */
+  color: var(--color-text);
+}

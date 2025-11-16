@@ -1,0 +1,140 @@
+.image-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.dropzone {
+  border: 2px dashed #007bff;
+  border-radius: 16px;
+  padding: 3rem 1rem;
+  text-align: center;
+  background-color: #f8f9fa;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+.dropzone.active {
+  background-color: #e6f0ff;
+  border-color: #0056b3;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.dropzone p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+.supported-formats {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.dropzone svg {
+  color: #007bff;
+  margin-bottom: 1rem;
+  transition: transform 0.3s;
+}
+
+.dropzone:hover svg {
+  transform: scale(1.1);
+}
+
+.url-upload {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 0.5rem;
+  background-color: #fff;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.url-upload svg {
+  color: #007bff;
+  margin-left: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.url-upload input {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.url-upload input:focus {
+  border: 1px solid #007bff;
+  background-color: #f0f8ff;
+}
+
+.url-upload button {
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.url-upload button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .dropzone {
+    padding: 2rem 1rem;
+  }
+
+  .url-upload {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .url-upload input {
+    width: 100%;
+  }
+
+  .url-upload button {
+    width: 100%;
+  }
+}
+
+/* Dark mode support */
+body.dark .dropzone,
+body.dark .url-upload {
+  background-color: #1e1e1e;
+  border-color: #444;
+  color: #eee;
+}
+
+body.dark .dropzone p,
+body.dark .supported-formats {
+  color: #ccc;
+}
+
+body.dark .url-upload input {
+  background-color: #2b2b2b;
+  color: #eee;
+}
+
+body.dark .url-upload button {
+  background-color: #1e90ff;
+}
+
+body.dark .url-upload button:hover {
+  background-color: #007acc;
+}
