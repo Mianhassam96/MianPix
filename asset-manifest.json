@@ -1,0 +1,37 @@
+{
+  "files": {
+    "main.css": "/MianPix/static/css/main.c90c3044.css",
+    "main.js": "/MianPix/static/js/main.ee1c66d2.js",
+    "static/css/547.067de7db.chunk.css": "/MianPix/static/css/547.067de7db.chunk.css",
+    "static/js/547.51ce3c08.chunk.js": "/MianPix/static/js/547.51ce3c08.chunk.js",
+    "static/css/326.a828e360.chunk.css": "/MianPix/static/css/326.a828e360.chunk.css",
+    "static/js/326.0560154b.chunk.js": "/MianPix/static/js/326.0560154b.chunk.js",
+    "static/css/882.a0f0ca68.chunk.css": "/MianPix/static/css/882.a0f0ca68.chunk.css",
+    "static/js/882.6deab994.chunk.js": "/MianPix/static/js/882.6deab994.chunk.js",
+    "static/css/788.50995d74.chunk.css": "/MianPix/static/css/788.50995d74.chunk.css",
+    "static/js/788.cd658cd9.chunk.js": "/MianPix/static/js/788.cd658cd9.chunk.js",
+    "static/css/975.d5df0c84.chunk.css": "/MianPix/static/css/975.d5df0c84.chunk.css",
+    "static/js/975.daa872ac.chunk.js": "/MianPix/static/js/975.daa872ac.chunk.js",
+    "static/js/12.9021768e.chunk.js": "/MianPix/static/js/12.9021768e.chunk.js",
+    "static/js/407.320da148.chunk.js": "/MianPix/static/js/407.320da148.chunk.js",
+    "index.html": "/MianPix/index.html",
+    "main.c90c3044.css.map": "/MianPix/static/css/main.c90c3044.css.map",
+    "main.ee1c66d2.js.map": "/MianPix/static/js/main.ee1c66d2.js.map",
+    "547.067de7db.chunk.css.map": "/MianPix/static/css/547.067de7db.chunk.css.map",
+    "547.51ce3c08.chunk.js.map": "/MianPix/static/js/547.51ce3c08.chunk.js.map",
+    "326.a828e360.chunk.css.map": "/MianPix/static/css/326.a828e360.chunk.css.map",
+    "326.0560154b.chunk.js.map": "/MianPix/static/js/326.0560154b.chunk.js.map",
+    "882.a0f0ca68.chunk.css.map": "/MianPix/static/css/882.a0f0ca68.chunk.css.map",
+    "882.6deab994.chunk.js.map": "/MianPix/static/js/882.6deab994.chunk.js.map",
+    "788.50995d74.chunk.css.map": "/MianPix/static/css/788.50995d74.chunk.css.map",
+    "788.cd658cd9.chunk.js.map": "/MianPix/static/js/788.cd658cd9.chunk.js.map",
+    "975.d5df0c84.chunk.css.map": "/MianPix/static/css/975.d5df0c84.chunk.css.map",
+    "975.daa872ac.chunk.js.map": "/MianPix/static/js/975.daa872ac.chunk.js.map",
+    "12.9021768e.chunk.js.map": "/MianPix/static/js/12.9021768e.chunk.js.map",
+    "407.320da148.chunk.js.map": "/MianPix/static/js/407.320da148.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c90c3044.css",
+    "static/js/main.ee1c66d2.js"
+  ]
+}
