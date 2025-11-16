@@ -1,91 +1,65 @@
-# MianPix - Simple Online Image Editor
+MianPix - Simple Online Image Editor
 
-**Edit, resize, crop, and compress your images online — fast, free, and privacy-friendly!**
+Edit, resize, crop, and compress your images online — fast, free, and privacy-friendly!
 
-MianPix is a lightweight, browser-based image editor built with **React**. It allows you to manipulate images entirely in your browser without uploading them to a server, ensuring your privacy is protected. Perfect for quick edits, resizing, cropping, and exporting images in multiple formats.
+MianPix is a lightweight, browser-based image editor built with React. It allows you to manipulate images entirely in your browser without uploading them to a server, ensuring your privacy is protected. Perfect for quick edits, resizing, cropping, and exporting images in multiple formats.
 
----
+Features:
 
-## 🌟 Features
+Upload images from your device or via URL
 
-- Upload images from your device or via URL.
-- Resize images to custom dimensions.
-- Rotate and flip images.
-- Crop images with precision.
-- Adjust image compression quality.
-- Export images in **PNG**, **JPG**, or **WEBP** formats.
-- Real-time preview of edits.
-- Dark and light theme toggle with smooth transitions.
-- Fully client-side processing — no server uploads.
-- Stylish and responsive design.
+Resize images to custom dimensions
 
----
+Rotate and flip images
 
-## 🛠️ Tech Stack
+Crop images with precision
 
-- **Frontend:** React, CSS3
-- **Libraries:** React Router, Framer Motion, React Icons, React Dropzone, React Toastify
-- **State Management:** React Context API
-- **Utilities:** FileReader API, Local Storage
+Adjust image compression quality
 
----
+Export images in PNG, JPG, or WEBP formats
 
-## 🚀 Getting Started
+Real-time preview of edits
 
-### Prerequisites
+Dark and light theme toggle with smooth transitions
 
-- Node.js (v16 or above)
-- npm or yarn
+Fully client-side processing — no server uploads
 
-### Installation
+Stylish and responsive design
 
-```bash
-# Clone the repository
-git clone https://github.com/Mianhassam96/MianPix.git
+Tech Stack:
 
-# Navigate into the project folder
-cd MianPix
+Frontend: React, CSS3
 
-# Install dependencies
-npm install
-# or
-yarn install
+Libraries: React Router, Framer Motion, React Icons, React Dropzone, React Toastify
 
-Running the Project
-# Start the development server
-npm start
-# or
-yarn start
+State Management: React Context API
 
+Utilities: FileReader API, Local Storage
+
+Getting Started:
+
+Clone the repository: git clone https://github.com/Mianhassam96/MianPix.git
+
+Navigate into the project folder: cd MianPix
+
+Install dependencies: npm install (or yarn install)
+
+Start the development server: npm start (or yarn start)
 
 Open http://localhost:3000
- to view it in your browser.
+ in your browser
 
-🎨 Theme Toggle
-
+Theme Toggle:
 MianPix features a dark/light theme toggle. Switch themes using the button in the navbar. The theme also changes the footer, feature boxes, and other UI elements dynamically.
 
-💻 Contribution
 
-Contributions are welcome! Feel free to:
+Contribution:
+Contributions are welcome! You can submit issues for bugs or feature requests, fork the repository, and create pull requests.
 
-Submit issues for bugs or feature requests.
-
-Fork the repository and create pull requests.
-
-📄 License
-
+License:
 This project is open-source and available under the MIT License.
 
-🌐 Live Demo
+Live Demo:
+(Add your live demo link here once deployed)
 
-[Add your live demo link here once deployed]
-
-Made with ❤️ by Mian Hassam
-
-
----
-
-If you want, I can also create a **shorter, catchy description** suitable for GitHub repo description section so it looks more attractive on GitHub.  
-
-Do you want me to do that?
+Made with ❤️ by MultiMian
