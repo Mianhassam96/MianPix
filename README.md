@@ -1,87 +1,65 @@
-# MianPix - Simple Image Editor
+MianPix - Simple Online Image Editor
 
-A modern, browser-based image editing tool built with React. Edit, resize, crop, and compress your images online without uploading to any server.
+Edit, resize, crop, and compress your images online — fast, free, and privacy-friendly!
 
-## Features
+MianPix is a lightweight, browser-based image editor built with React. It allows you to manipulate images entirely in your browser without uploading them to a server, ensuring your privacy is protected. Perfect for quick edits, resizing, cropping, and exporting images in multiple formats.
 
-- 📤 **Upload Images**: From device, URL, or drag-and-drop
-- ✂️ **Crop**: Interactive cropping with precise controls
-- 📏 **Resize**: Custom dimensions
-- 🔄 **Transform**: Rotate and flip (horizontal/vertical)
-- 🗜️ **Compress**: Adjustable quality slider
-- 💾 **Export**: Download as PNG, JPG, or WEBP
-- 🌓 **Dark/Light Theme**: Toggle between themes
-- 🔒 **Privacy**: All processing happens in your browser
+Features:
 
-## Tech Stack
+Upload images from your device or via URL
 
-- React 18
-- React Router
-- react-dropzone (file uploads)
-- react-image-crop (cropping)
-- react-icons (UI icons)
-- HTML5 Canvas API (image processing)
+Resize images to custom dimensions
 
-## Installation
+Rotate and flip images
 
-1. Install dependencies:
-```bash
-npm install
-```
+Crop images with precision
 
-2. Start the development server:
-```bash
-npm start
-```
+Adjust image compression quality
 
-3. Open [http://localhost:3000](http://localhost:3000) to view in browser
+Export images in PNG, JPG, or WEBP formats
 
-## Available Scripts
+Real-time preview of edits
 
-- `npm start` - Run development server
-- `npm build` - Create production build
-- `npm test` - Run tests
-- `npm eject` - Eject from create-react-app (one-way operation)
+Dark and light theme toggle with smooth transitions
 
-## Usage
+Fully client-side processing — no server uploads
 
-1. Navigate to the **Tool** page
-2. Upload an image (drag-drop, file picker, or URL)
-3. Use the sidebar controls to:
-   - Rotate or flip the image
-   - Crop with interactive handles
-   - Resize to custom dimensions
-   - Adjust compression quality
-   - Select output format
-4. Click **Download** to save your edited image
+Stylish and responsive design
 
-## Project Structure
+Tech Stack:
 
-```
-MianPix/
-├── public/
-│   └── index.html
-├── src/
-│   ├── components/
-│   │   ├── Navbar.js
-│   │   ├── ImageUpload.js
-│   │   └── ImageEditor.js
-│   ├── pages/
-│   │   ├── Home.js
-│   │   ├── Tool.js
-│   │   ├── About.js
-│   │   └── Contact.js
-│   ├── App.js
-│   ├── index.js
-│   └── [CSS files]
-├── package.json
-└── README.md
-```
+Frontend: React, CSS3
 
-## License
+Libraries: React Router, Framer Motion, React Icons, React Dropzone, React Toastify
 
-MIT License - Free to use and modify
+State Management: React Context API
 
-## Author
+Utilities: FileReader API, Local Storage
 
-Built with ❤️ for simple image editing needs
+Getting Started:
+
+Clone the repository: git clone https://github.com/Mianhassam96/MianPix.git
+
+Navigate into the project folder: cd MianPix
+
+Install dependencies: npm install (or yarn install)
+
+Start the development server: npm start (or yarn start)
+
+Open http://localhost:3000
+ in your browser
+
+Theme Toggle:
+MianPix features a dark/light theme toggle. Switch themes using the button in the navbar. The theme also changes the footer, feature boxes, and other UI elements dynamically.
+
+
+Contribution:
+Contributions are welcome! You can submit issues for bugs or feature requests, fork the repository, and create pull requests.
+
+License:
+This project is open-source and available under the MIT License.
+
+Live Demo:
+(Add your live demo link here once deployed)
+
+Made with ❤️ by MultiMian
