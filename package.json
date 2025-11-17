@@ -22,15 +22,14 @@
     "gh-pages": "^5.0.0",
     "prettier": "^3.1.1"
   },
-  "homepage": "https://Mianhassam96.github.io/MianPix",
-"scripts": {
-  "start": "react-scripts start",
-  "build": "react-scripts build",
-  "test": "react-scripts test",
-  "eject": "react-scripts eject",
-  "predeploy": "npm run build",
-  "deploy": "gh-pages -d build"
-},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
   "eslintConfig": {
     "extends": [
       "react-app"
