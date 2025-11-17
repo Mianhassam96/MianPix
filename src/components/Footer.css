@@ -1,14 +1,64 @@
 .footer {
   padding: 18px 24px;
-  text-align: center;
-  opacity: 0.9;
-  transition: background-color 0.3s, color 0.3s;
-  background-color: var(--color-surface);
+  background: var(--color-surface);
   color: var(--color-text);
-  box-shadow: var(--shadow-small);
+  border-top: 1px solid var(--color-border);
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-.footer.dark {
-  background-color: var(--color-surface); /* uses dark theme surface color */
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between; /* text left, icons right */
+  align-items: center;
+}
+
+.footer-text {
+  font-size: 0.95rem;
+}
+
+.brand-name {
+  font-weight: 600;
+  color: var(--brand-color);
+  margin-left: 4px;
+  transition: color 0.3s ease;
+}
+
+/* Light Theme Brand Color */
+:root {
+  --brand-color: #007bff;
+}
+
+/* Dark Theme Brand Color */
+.dark {
+  --brand-color: #8b5cf6;
+}
+
+/* Social Icons */
+.footer-social {
+  display: flex;
+  gap: 14px;
+}
+
+.footer-social a {
   color: var(--color-text);
+  font-size: 1.2rem;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.footer-social a:hover {
+  color: var(--brand-color);
+  transform: translateY(-3px);
+}
+.footer-link {
+  color: #125cfa; /* yellowish color */
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #315ff5; /* hover color */
+  transform: scale(1.1);
 }

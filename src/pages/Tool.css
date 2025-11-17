@@ -1,89 +1,138 @@
+/* Tool.css */
+
+/* Main Page Container */
 .tool-page {
-  width: 100%;
-  padding: 40px 24px;
-  color: var(--text-color, #111);
-  transition: color 0.3s ease, background 0.3s ease;
+  padding: 4rem 2rem;
+  min-height: 80vh;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.tool-page.light {
+  background: linear-gradient(120deg, #f8f9fa, #e9ecef);
+  color: var(--color-text);
+}
+
+.tool-page.dark {
+  background: linear-gradient(120deg, #1a1a1a, #2a2a2a);
+  color: var(--color-text);
 }
 
 .tool-container {
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
 }
 
-.upload-section,
-.editor-section {
-  background-color: var(--card-bg, #fff);
-  padding: 40px 30px;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+/* Upload Section */
+.upload-section {
   text-align: center;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 2rem;
+  padding: 2rem;
+  border-radius: var(--radius-large);
+  box-shadow: var(--shadow-large);
+  backdrop-filter: blur(8px);
+  transition: background 0.3s, box-shadow 0.3s;
 }
 
-.upload-section h1,
-.editor-section h1 {
-  font-size: 2rem;
-  margin-bottom: 12px;
-  color: var(--primary-color, #007bff);
+.tool-page.light .upload-section {
+  background: rgba(255, 255, 255, 0.8);
 }
 
-.upload-section p,
-.editor-section p {
-  font-size: 1rem;
-  margin-bottom: 20px;
-  opacity: 0.85;
+.tool-page.dark .upload-section {
+  background: rgba(0, 0, 0, 0.6);
 }
 
+/* Titles */
+.tool-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.tool-desc {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: var(--color-text-secondary);
+}
+
+/* Editor Section */
 .editor-section {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  border-radius: var(--radius-large);
+  box-shadow: var(--shadow-large);
+  backdrop-filter: blur(8px);
+  transition: background 0.3s, box-shadow 0.3s;
 }
 
-.editor-section img {
-  max-width: 100%;
-  max-height: 500px;
-  border-radius: 12px;
-  margin-bottom: 20px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+.tool-page.light .editor-section {
+  background: rgba(255, 255, 255, 0.8);
 }
 
-button.reset-button {
-  padding: 0.8rem 2rem;
-  border-radius: 8px;
+.tool-page.dark .editor-section {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+/* Buttons */
+.tool-container button {
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-small);
   border: none;
-  background-color: var(--primary-color, #007bff);
-  color: white;
-  font-weight: 600;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
+  color: #fff;
+  font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
 }
-button.reset-button:hover {
-  background-color: #0056b3;
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+
+.tool-container button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
 }
 
-/* Dark mode support */
-body.dark .tool-page {
-  color: #eee;
+/* Image Preview */
+.editor-section img {
+  max-width: 100%;
+  border-radius: var(--radius-medium);
+  box-shadow: var(--shadow-medium);
+  transition: all 0.3s ease;
 }
-body.dark .upload-section,
-body.dark .editor-section {
-  background-color: #1f1f1f;
-  box-shadow: 0 10px 30px rgba(255,255,255,0.05);
+
+/* Dark/Light Theme Image Borders */
+.tool-page.light .editor-section img {
+  border: 1px solid var(--color-border);
 }
-body.dark button.reset-button {
-  background-color: #1e90ff;
+
+.tool-page.dark .editor-section img {
+  border: 1px solid #555;
 }
-body.dark button.reset-button:hover {
-  background-color: #0d6efd;
+
+/* Fade-in animation for smooth effect */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.upload-section, .editor-section {
+  animation: fadeIn 0.6s ease-in-out;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .upload-section,
-  .editor-section {
-    padding: 30px 20px;
+  .tool-title {
+    font-size: 2rem;
+  }
+
+  .tool-desc {
+    font-size: 1rem;
+  }
+
+  .tool-container button {
+    width: 100%;
   }
 }

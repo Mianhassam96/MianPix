@@ -19,12 +19,84 @@
   margin: 0 auto;
 }
 
-.navbar-logo {
-  font-size: 1.8rem;
+/* Import a stylish font (Google Fonts) */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@700&display=swap');
+/* Light Theme Logo */
+.navbar.light .navbar-logo {
+  font-family: 'Pacifico', cursive;
+  font-size: 2.2rem;
   font-weight: bold;
-  color: var(--color-primary);
+  letter-spacing: 1.5px;
   text-decoration: none;
+
+  background: linear-gradient(90deg, #ff6a00, #ee0979, #8e2de2, #4a00e0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease, text-shadow 0.3s ease;
+  position: relative;
 }
+
+.navbar.light .navbar-logo:hover {
+  transform: scale(1.15);
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.35);
+}
+
+.navbar.light .navbar-logo::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 3px;
+  bottom: -5px;
+  left: 0;
+  background: #ff6a00;
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+.navbar.light .navbar-logo:hover::after {
+  width: 100%;
+}
+
+/* Dark Theme Logo */
+.navbar.dark .navbar-logo {
+  font-family: 'Pacifico', cursive;
+  font-size: 2.2rem;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+
+  background: linear-gradient(90deg, #4ade80, #06b6d4, #3b82f6, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, text-shadow 0.3s ease;
+  position: relative;
+}
+
+.navbar.dark .navbar-logo:hover {
+  transform: scale(1.15);
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+.navbar.dark .navbar-logo::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 3px;
+  bottom: -5px;
+  left: 0;
+  background: #4ade80;
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+.navbar.dark .navbar-logo:hover::after {
+  width: 100%;
+}
+
 
 /* Menu on the right */
 .navbar-right {
