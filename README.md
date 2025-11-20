@@ -1,65 +1,82 @@
-MianPix - Simple Online Image Editor
+🌟MianPix — Online Image Editor
 
-Edit, resize, crop, and compress your images online — fast, free, and privacy-friendly!
+🚀 Overview
 
-MianPix is a lightweight, browser-based image editor built with React. It allows you to manipulate images entirely in your browser without uploading them to a server, ensuring your privacy is protected. Perfect for quick edits, resizing, cropping, and exporting images in multiple formats.
+MianPix is a fast, free, and responsive online image editor.
+Easily upload, crop, resize, compress, and edit images with a modern and intuitive interface.
+Supports Dark/Light mode toggle, social media links, and is fully responsive.
 
-Features:
+🌐 Live Demo: https://mianhassam96.github.io/MianPix/
+
+🌟 Features
 
 Upload images from your device or via URL
 
-Resize images to custom dimensions
+Crop and resize images easily
 
-Rotate and flip images
+Compress images for faster sharing
 
-Crop images with precision
+Dark / Light mode toggle
 
-Adjust image compression quality
+Social media links integrated
 
-Export images in PNG, JPG, or WEBP formats
+Fully responsive for mobile and desktop
 
-Real-time preview of edits
+🛠 Technologies Used
+Frontend	Libraries & Tools
+React 18	Framer Motion
+CSS3 / SCSS	React Icons (FontAwesome)
+React Router	React Toastify
+Pica	GitHub Pages
 
-Dark and light theme toggle with smooth transitions
+⚡ Installation & Setup
 
-Fully client-side processing — no server uploads
+Clone the repository:
 
-Stylish and responsive design
-
-Tech Stack:
-
-Frontend: React, CSS3
-
-Libraries: React Router, Framer Motion, React Icons, React Dropzone, React Toastify
-
-State Management: React Context API
-
-Utilities: FileReader API, Local Storage
-
-Getting Started:
-
-Clone the repository: git clone https://github.com/Mianhassam96/MianPix.git
-
-Navigate into the project folder: cd MianPix
-
-Install dependencies: npm install (or yarn install)
-
-Start the development server: npm start (or yarn start)
-
-Open http://localhost:3000
- in your browser
-
-Theme Toggle:
-MianPix features a dark/light theme toggle. Switch themes using the button in the navbar. The theme also changes the footer, feature boxes, and other UI elements dynamically.
+git clone https://github.com/Mianhassam96/MianPix.git
+cd MianPix
+npm install
+npm start
 
 
-Contribution:
-Contributions are welcome! You can submit issues for bugs or feature requests, fork the repository, and create pull requests.
+Open in browser: http://localhost:3000
+🌐 Deployment
 
-License:
-This project is open-source and available under the MIT License.
+Deployed on GitHub Pages:
 
-Live Demo:
-(Add your live demo link here once deployed)
+npm run build
+npm run deploy
 
-Made with ❤️ by MultiMian
+
+Live Site: https://mianhassam96.github.io/MianPix/
+
+🤝 Contribution
+
+Contributions are welcome and encouraged:
+
+Fork the repository
+
+Create your feature branch (git checkout -b feature/YourFeature)
+
+Commit your changes (git commit -m "Add YourFeature")
+
+Push to the branch (git push origin feature/YourFeature)
+
+Open a Pull Request
+
+👤 Author
+
+Mian Hassam
+
+GitHub: https://github.com/Mianhassam96
+
+LinkedIn: https://www.linkedin.com/in/mianhassam96/
+
+Facebook: https://www.facebook.com/mian.hassam.kz
+
+Instagram: https://www.instagram.com/mianhassam96/
+
+📝 License
+
+This project is licensed under the MIT License — see the LICENSE
+ file for details.
