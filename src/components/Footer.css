@@ -1,10 +1,4 @@
-.footer {
-  padding: 18px 24px;
-  background: var(--color-surface);
-  color: var(--color-text);
-  border-top: 1px solid var(--color-border);
-  transition: background 0.3s ease, color 0.3s ease;
-}
+
 
 .footer-container {
   max-width: 1200px;
