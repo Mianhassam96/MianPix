@@ -5,24 +5,29 @@
   justify-content: center;
   padding: 2rem;
   text-align: center;
+  transition: color 0.3s ease, background 0.3s ease;
 }
 
 .not-found-container {
   max-width: 600px;
+  width: 100%;
 }
 
 .error-icon {
   color: var(--color-warning);
   margin-bottom: 2rem;
   filter: drop-shadow(var(--shadow-medium));
+  font-size: 4rem;
 }
 
+/* Headings & Text */
 .not-found h1 {
   font-size: 8rem;
   font-weight: bold;
   color: var(--color-primary);
   margin-bottom: 1rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  line-height: 1;
 }
 
 .not-found h2 {
@@ -37,6 +42,7 @@
   margin-bottom: 2rem;
 }
 
+/* Action Buttons */
 .action-buttons {
   display: flex;
   gap: 1rem;
@@ -53,7 +59,8 @@
   text-decoration: none;
   font-size: 1.1rem;
   border-radius: var(--radius-small);
-  transition: all var(--transition-fast);
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .btn-secondary {
@@ -63,10 +70,11 @@
 
 .btn-secondary:hover {
   background-color: #5a6268;
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.02);
   box-shadow: var(--shadow-medium);
 }
 
+/* Suggestions Links */
 .suggestions {
   margin-top: 3rem;
   padding-top: 2rem;
@@ -84,6 +92,8 @@
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
+  padding: 0;
+  margin: 0;
 }
 
 .suggestions ul li a {
@@ -91,14 +101,27 @@
   text-decoration: none;
   padding: 0.5rem 1rem;
   border-radius: var(--radius-small);
-  transition: all var(--transition-fast);
+  transition: all 0.3s ease;
 }
 
 .suggestions ul li a:hover {
   background-color: var(--color-primary);
   color: white;
+  transform: translateY(-2px);
 }
 
+/* Responsive - Tablets */
+@media (max-width: 900px) {
+  .not-found h1 {
+    font-size: 6rem;
+  }
+
+  .not-found h2 {
+    font-size: 2.2rem;
+  }
+}
+
+/* Responsive - Mobile */
 @media (max-width: 768px) {
   .not-found h1 {
     font-size: 5rem;
@@ -112,4 +135,48 @@
     flex-direction: column;
     align-items: stretch;
   }
+
+  .action-buttons .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .suggestions ul {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+
+/* Responsive - Small Mobile */
+@media (max-width: 480px) {
+  .not-found h1 {
+    font-size: 4rem;
+  }
+
+  .not-found h2 {
+    font-size: 1.8rem;
+  }
+
+  .not-found p {
+    font-size: 1rem;
+  }
+}
+
+/* Dark Mode Support */
+body.dark .not-found h1,
+body.dark .not-found h2,
+body.dark .not-found p {
+  color: #eee;
+}
+
+body.dark .btn-secondary {
+  background-color: #555;
+}
+
+body.dark .btn-secondary:hover {
+  background-color: #777;
+}
+
+body.dark .suggestions ul li a:hover {
+  background-color: #8b5cf6;
 }

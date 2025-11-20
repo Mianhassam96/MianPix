@@ -2,7 +2,7 @@
   padding: 3rem 1rem;
   max-width: 1000px;
   margin: 0 auto;
-  color: #2f02d3;
+  color: #111;
 }
 
 .about-container h1 {
@@ -17,9 +17,27 @@
   line-height: 1.6;
   text-align: center;
   margin-bottom: 3rem;
+  color: #555;
+}
+
+/* Dark mode */
+body.dark .about,
+body.dark .about-container p,
+body.dark .features-list li,
+body.dark .tech-item span {
+  color: #eee;
+}
+
+
+.about-container p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  text-align: center;
+  margin-bottom: 3rem;
   color: #717580;
 }
 
+/* Tech Stack Section */
 .tech-stack {
   text-align: center;
   margin-bottom: 3rem;
@@ -42,11 +60,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: transform 0.3s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .tech-item:hover {
   transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .tech-item span {
@@ -56,6 +75,7 @@
   color: #555;
 }
 
+/* Features List */
 .features-list h2 {
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
@@ -76,22 +96,73 @@
   line-height: 1.6;
 }
 
-/* Responsive */
+/* Responsive - Tablets */
+@media (max-width: 900px) {
+  .about-container h1 {
+    font-size: 2.2rem;
+  }
+
+  .features-list ul {
+    padding-left: 1.2rem;
+  }
+}
+
+/* Responsive - Mobile */
 @media (max-width: 768px) {
+  .about-container h1 {
+    font-size: 2rem;
+  }
+
+  .about-container p {
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
   .tech-icons {
     gap: 1.5rem;
   }
 
-  .about-container h1 {
-    font-size: 2rem;
+  .tech-item span {
+    font-size: 0.95rem;
+  }
+
+  .features-list h2 {
+    font-size: 1.6rem;
   }
 
   .features-list ul {
     padding-left: 1rem;
   }
+
+  .features-list li {
+    font-size: 0.95rem;
+  }
 }
 
-/* Dark mode support */
+/* Responsive - Small Mobile */
+@media (max-width: 480px) {
+  .about-container h1 {
+    font-size: 1.7rem;
+  }
+
+  .about-container p {
+    font-size: 0.95rem;
+  }
+
+  .tech-icons {
+    gap: 1rem;
+  }
+
+  .features-list h2 {
+    font-size: 1.5rem;
+  }
+
+  .features-list li {
+    font-size: 0.9rem;
+  }
+}
+
+/* Dark Mode Support */
 body.dark .about {
   color: #ccc;
 }

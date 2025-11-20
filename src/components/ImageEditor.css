@@ -147,13 +147,42 @@
   transform: scale(1.01);
 }
 
-/* Responsive */
+/* Responsive: Tablets */
 @media (max-width: 1024px) {
   .image-editor {
     grid-template-columns: 1fr;
   }
   .controls-panel {
     margin-bottom: 2rem;
+  }
+}
+
+/* Responsive: Mobile */
+@media (max-width: 768px) {
+  .image-editor {
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .controls-panel,
+  .preview-panel {
+    padding: 1.5rem;
+  }
+
+  .control-group h3,
+  .preview-panel h3 {
+    font-size: 1rem;
+  }
+
+  .preview-panel img {
+    max-height: 50vh;
+    width: 100%;
+  }
+
+  .download-btn,
+  .reset-btn {
+    font-size: 0.95rem;
+    padding: 0.6rem;
   }
 }
 
@@ -179,4 +208,17 @@ body.dark select:focus {
 
 body.dark button {
   border-color: rgba(255,255,255,0.1);
+}
+.image-editor,
+.controls-panel,
+.preview-panel {
+  background-color: #fff;
+  color: #000;
+}
+
+body.dark .image-editor,
+body.dark .controls-panel,
+body.dark .preview-panel {
+  background-color: #1e1e1e;
+  color: #eee;
 }

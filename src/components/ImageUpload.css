@@ -5,8 +5,23 @@
   max-width: 500px;
   margin: 0 auto;
   padding: 1rem;
+  transition: all 0.3s ease;
+}
+.image-upload,
+.dropzone,
+.url-upload {
+  background-color: #fff;
+  color: #000;
 }
 
+body.dark .image-upload,
+body.dark .dropzone,
+body.dark .url-upload {
+  background-color: #1e1e1e;
+  color: #eee;
+}
+
+/* Dropzone Styles */
 .dropzone {
   border: 2px dashed #007bff;
   border-radius: 16px;
@@ -38,13 +53,14 @@
 .dropzone svg {
   color: #007bff;
   margin-bottom: 1rem;
-  transition: transform 0.3s;
+  transition: transform 0.3s ease;
 }
 
 .dropzone:hover svg {
   transform: scale(1.1);
 }
 
+/* URL Upload Section */
 .url-upload {
   display: flex;
   gap: 0.5rem;
@@ -54,6 +70,7 @@
   padding: 0.5rem;
   background-color: #fff;
   box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
 }
 
 .url-upload svg {
@@ -69,7 +86,7 @@
   border-radius: 8px;
   outline: none;
   font-size: 1rem;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
 }
 
 .url-upload input:focus {
@@ -85,7 +102,7 @@
   color: white;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
 }
 
 .url-upload button:hover {
@@ -93,8 +110,13 @@
   transform: scale(1.05);
 }
 
-/* Responsive */
-@media (max-width: 600px) {
+/* Responsive - Mobile & Tablet */
+@media (max-width: 768px) {
+  .image-upload {
+    padding: 0.5rem;
+    gap: 1.5rem;
+  }
+
   .dropzone {
     padding: 2rem 1rem;
   }
@@ -104,16 +126,30 @@
     gap: 0.5rem;
   }
 
-  .url-upload input {
-    width: 100%;
-  }
-
+  .url-upload input,
   .url-upload button {
     width: 100%;
   }
 }
 
-/* Dark mode support */
+/* Small Mobile */
+@media (max-width: 480px) {
+  .dropzone p,
+  .supported-formats {
+    font-size: 0.9rem;
+  }
+
+  .url-upload input {
+    font-size: 0.95rem;
+  }
+
+  .url-upload button {
+    font-size: 0.95rem;
+    padding: 0.45rem 0.75rem;
+  }
+}
+
+/* Dark Mode Support */
 body.dark .dropzone,
 body.dark .url-upload {
   background-color: #1e1e1e;

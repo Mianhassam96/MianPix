@@ -10,6 +10,11 @@
   --color-text: #111827;          /* Dark gray */
   --color-text-secondary: #6b7280;/* Medium gray */
   --color-border: #e5e7eb;        /* Light border */
+
+  --radius-small: 8px;
+  --shadow-medium: 0 6px 15px rgba(0,0,0,0.1);
+  --transition-normal: 0.3s ease;
+  --transition-fast: 0.2s ease;
 }
 
 .dark {
@@ -25,7 +30,6 @@
   --color-text-secondary: #d1d5db;/* Secondary text */
   --color-border: #374151;        /* Border dark */
 }
-
 
 * {
   margin: 0;
@@ -121,4 +125,23 @@ body {
 
 .fade-in {
   animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Universal Dark Mode Overrides */
+body.dark input,
+body.dark select,
+body.dark textarea {
+  background-color: #2b2b2b;
+  color: #eee;
+  border-color: rgba(255,255,255,0.2);
+}
+
+body.dark input:focus,
+body.dark select:focus,
+body.dark textarea:focus {
+  border-color: var(--color-primary);
+}
+
+body.dark button {
+  border-color: rgba(255,255,255,0.1);
 }

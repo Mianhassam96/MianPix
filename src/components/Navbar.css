@@ -1,9 +1,9 @@
 /* Navbar base styles */
 .navbar {
   display: flex;
-  justify-content: space-between; /* ensures left & right alignment */
+  justify-content: center;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 1rem 1.5rem;
   background-color: var(--color-surface);
   color: var(--color-text);
   box-shadow: var(--shadow-small);
@@ -12,75 +12,40 @@
 
 .navbar-container {
   display: flex;
-  justify-content: space-between; /* logo left, menu right */
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
 }
 
-/* Import a stylish font (Google Fonts) */
+/* Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@700&display=swap');
+
 /* Light Theme Logo */
-.navbar.light .navbar-logo {
-  font-family: 'Pacifico', cursive;
-  font-size: 2.2rem;
-  font-weight: bold;
-  letter-spacing: 1.5px;
-  text-decoration: none;
-
-  background: linear-gradient(90deg, #ff6a00, #ee0979, #8e2de2, #4a00e0);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
-  transition: transform 0.3s ease, text-shadow 0.3s ease;
-  position: relative;
-}
-
-.navbar.light .navbar-logo:hover {
-  transform: scale(1.15);
-  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.35);
-}
-
-.navbar.light .navbar-logo::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 3px;
-  bottom: -5px;
-  left: 0;
-  background: #ff6a00;
-  transition: width 0.3s ease;
-  border-radius: 2px;
-}
-
-.navbar.light .navbar-logo:hover::after {
-  width: 100%;
-}
-
-/* Dark Theme Logo */
+.navbar.light .navbar-logo,
 .navbar.dark .navbar-logo {
   font-family: 'Pacifico', cursive;
   font-size: 2.2rem;
   font-weight: bold;
   letter-spacing: 1.5px;
   text-decoration: none;
-
-  background: linear-gradient(90deg, #4ade80, #06b6d4, #3b82f6, #8b5cf6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
   transition: transform 0.3s ease, text-shadow 0.3s ease;
   position: relative;
 }
 
-.navbar.dark .navbar-logo:hover {
-  transform: scale(1.15);
-  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+/* Gradient colors */
+.navbar.light .navbar-logo {
+  background: linear-gradient(90deg, #ff6a00, #ee0979, #8e2de2, #4a00e0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.navbar.dark .navbar-logo {
+  background: linear-gradient(90deg, #4ade80, #06b6d4, #3b82f6, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
+.navbar.light .navbar-logo::after,
 .navbar.dark .navbar-logo::after {
   content: '';
   position: absolute;
@@ -88,24 +53,32 @@
   height: 3px;
   bottom: -5px;
   left: 0;
-  background: #4ade80;
   transition: width 0.3s ease;
   border-radius: 2px;
 }
 
-.navbar.dark .navbar-logo:hover::after {
+.navbar.light .navbar-logo::after {
+  background: #ff6a00;
+}
+.navbar.dark .navbar-logo::after {
+  background: #4ade80;
+}
+
+.navbar-logo:hover {
+  transform: scale(1.15);
+}
+.navbar-logo:hover::after {
   width: 100%;
 }
 
-
-/* Menu on the right */
+/* Navbar right */
 .navbar-right {
   display: flex;
   align-items: center;
-  gap: 2rem; /* space between menu and toggle */
+  gap: 1.5rem;
 }
 
-/* Navbar menu links */
+/* Menu links */
 .navbar-menu {
   display: flex;
   list-style: none;
@@ -123,10 +96,10 @@
   color: var(--color-primary);
 }
 
-/* Theme Toggle Button */
+/* Theme Toggle */
 .theme-toggle {
-  width: 60px;
-  height: 30px;
+  width: 55px;
+  height: 28px;
   border-radius: 15px;
   border: none;
   cursor: pointer;
@@ -134,18 +107,18 @@
   align-items: center;
   padding: 2px;
   transition: all 0.3s ease;
-  background: linear-gradient(135deg, #007bff, #0056b3); /* Light theme gradient */
+  background: linear-gradient(135deg, #007bff, #0056b3);
   justify-content: flex-start;
 }
 
 .navbar.dark .theme-toggle {
-  background: linear-gradient(135deg, #8b5cf6, #7c3aed); /* Dark theme gradient */
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
   justify-content: flex-end;
 }
 
 .theme-toggle span {
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background-color: white;
   display: flex;
@@ -156,27 +129,107 @@
 }
 
 .theme-toggle span svg {
-  width: 16px;
-  height: 16px;
-  transition: color 0.3s;
-  color: #fbbf24; /* sun color default */
+  width: 15px;
+  height: 15px;
 }
 
-.navbar.dark .theme-toggle span svg {
-  color: #a5b4fc; /* moon color */
+/* ---------------------------------------
+   RESPONSIVE DESIGN (MOBILE / TABLET)
+--------------------------------------- */
+
+/* Tablets (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .navbar-logo {
+    font-size: 2rem;
+  }
+  .navbar-menu {
+    gap: 1.5rem;
+  }
 }
 
-.theme-toggle:hover span {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.35), 0 0 8px rgba(255,255,255,0.2);
-}
-
-/* Responsive */
+/* Large Mobile (max-width: 768px) */
 @media (max-width: 768px) {
+  .navbar {
+    padding: 1rem;
+  }
+
+  .navbar-logo {
+    font-size: 1.8rem;
+  }
+
   .navbar-menu {
     gap: 1rem;
   }
 
   .navbar-menu li a {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Medium Mobile (max-width: 480px) */
+@media (max-width: 480px) {
+  .navbar-container {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .navbar-logo {
+    font-size: 1.7rem;
+  }
+
+  .navbar-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .navbar-menu {
+    gap: 0.8rem;
+  }
+
+  .theme-toggle {
+    width: 50px;
+    height: 26px;
+  }
+
+  .theme-toggle span {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+/* Small Mobile (max-width: 375px) */
+@media (max-width: 375px) {
+  .navbar-logo {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+  }
+
+  .navbar-menu li a {
+    font-size: 0.85rem;
+  }
+}
+
+/* Extra Small Mobile (max-width: 320px) */
+@media (max-width: 320px) {
+  .navbar-logo {
+    font-size: 1.4rem;
+  }
+
+  .navbar-menu {
+    gap: 0.5rem;
+  }
+
+  .navbar-menu li a {
+    font-size: 0.78rem;
+  }
+
+  .theme-toggle {
+    width: 45px;
+    height: 24px;
+  }
+
+  .theme-toggle span {
+    width: 20px;
+    height: 20px;
   }
 }

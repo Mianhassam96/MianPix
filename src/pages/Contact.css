@@ -31,13 +31,14 @@
 .contact p {
   font-size: 1.1rem;
   margin-bottom: 2rem;
+  color: var(--color-text-secondary);
 }
 
 /* Form Styles */
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.2rem;
   margin-bottom: 3rem;
 }
 
@@ -48,19 +49,25 @@
 }
 
 .contact-form label {
-  margin-bottom: 0.5rem;
-  font-weight: 500;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  font-size: 0.95rem;
 }
 
 .contact-form input,
 .contact-form textarea {
-  padding: 0.75rem 1rem;
+  padding: 0.9rem 1rem;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-small);
   background-color: var(--color-background);
   color: var(--color-text);
   font-size: 1rem;
   transition: all 0.3s ease;
+}
+
+.contact-form textarea {
+  min-height: 140px;
+  resize: vertical;
 }
 
 .contact-form input:focus,
@@ -70,8 +77,9 @@
   box-shadow: var(--shadow-small);
 }
 
+/* Button */
 .submit-btn {
-  padding: 0.75rem 1.5rem;
+  padding: 0.85rem 1.6rem;
   border: none;
   border-radius: var(--radius-small);
   background-color: var(--color-primary);
@@ -87,19 +95,25 @@
   box-shadow: var(--shadow-medium);
 }
 
+.submit-btn:active {
+  transform: scale(0.97);
+}
+
 /* Social Links Section */
 .social-links h2 {
   font-size: 1.8rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
 }
 
 .social-icons {
   display: flex;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 1.7rem;
+  flex-wrap: wrap;
 }
 
 .social-icons a {
+  font-size: 32px;
   color: var(--color-text);
   transition: all 0.3s ease;
 }
@@ -109,20 +123,67 @@
 }
 
 .contact.dark .social-icons a:hover {
-  color: #8b5cf6; /* purple accent for dark theme */
+  color: #8b5cf6; /* purple accent for dark mode */
 }
 
-/* Responsive */
+/* Responsive Styles */
+
+/* Tablets */
+@media (max-width: 900px) {
+  .contact {
+    padding: 3rem 1.5rem;
+  }
+
+  .contact h1 {
+    font-size: 2.2rem;
+  }
+}
+
+/* Mobile */
 @media (max-width: 768px) {
+  .contact {
+    padding: 2.5rem 1.2rem;
+  }
+
   .contact h1 {
     font-size: 2rem;
   }
 
-  .submit-btn {
+  .contact p {
     font-size: 1rem;
   }
 
+  .submit-btn {
+    width: 100%;
+    font-size: 1.05rem;
+  }
+
   .social-icons a {
-    font-size: 30px;
+    font-size: 28px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .contact h1 {
+    font-size: 1.7rem;
+  }
+
+  .contact p {
+    font-size: 0.95rem;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 0.95rem;
+    padding: 0.75rem 0.9rem;
+  }
+
+  .social-icons {
+    gap: 1.2rem;
+  }
+
+  .social-icons a {
+    font-size: 26px;
   }
 }

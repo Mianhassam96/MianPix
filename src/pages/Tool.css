@@ -95,6 +95,10 @@
   box-shadow: var(--shadow-medium);
 }
 
+.tool-container button:active {
+  transform: scale(0.97);
+}
+
 /* Image Preview */
 .editor-section img {
   max-width: 100%;
@@ -103,7 +107,6 @@
   transition: all 0.3s ease;
 }
 
-/* Dark/Light Theme Image Borders */
 .tool-page.light .editor-section img {
   border: 1px solid var(--color-border);
 }
@@ -112,7 +115,7 @@
   border: 1px solid #555;
 }
 
-/* Fade-in animation for smooth effect */
+/* Fade-in animation */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -122,17 +125,67 @@
   animation: fadeIn 0.6s ease-in-out;
 }
 
-/* Responsive */
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .tool-page {
+    padding: 3rem 1.5rem;
+  }
+
+  .tool-title {
+    font-size: 2.2rem;
+  }
+
+  .tool-container {
+    gap: 2.5rem;
+  }
+}
+
 @media (max-width: 768px) {
+  .tool-page {
+    padding: 2.5rem 1.2rem;
+  }
+
   .tool-title {
     font-size: 2rem;
   }
 
   .tool-desc {
-    font-size: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .upload-section,
+  .editor-section {
+    padding: 1.5rem;
   }
 
   .tool-container button {
     width: 100%;
+    font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tool-page {
+    padding: 2rem 1rem;
+  }
+
+  .tool-title {
+    font-size: 1.7rem;
+    text-align: center;
+  }
+
+  .tool-desc {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .upload-section,
+  .editor-section {
+    padding: 1.2rem;
+  }
+
+  .editor-section img {
+    max-height: 260px;
+    object-fit: contain;
   }
 }
