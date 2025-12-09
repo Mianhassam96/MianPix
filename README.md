@@ -1,7 +1,5 @@
 🌟MianPix — Online Image Editor
 
-🚀 Overview
-
 MianPix is a fast, free, and responsive online image editor.
 Easily upload, crop, resize, compress, and edit images with a modern and intuitive interface.
 Supports Dark/Light mode toggle, social media links, and is fully responsive.
