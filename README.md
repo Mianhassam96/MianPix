@@ -4,7 +4,6 @@ MianPix is a fast, free, and responsive online image editor.
 Easily upload, crop, resize, compress, and edit images with a modern and intuitive interface.
 Supports Dark/Light mode toggle, social media links, and is fully responsive.
 
-🌐 Live Demo: https://mianhassam96.github.io/MianPix/
 
 🌟 Features
 
@@ -46,7 +45,8 @@ npm run build
 npm run deploy
 
 
-Live Site: https://mianhassam96.github.io/MianPix/
+🌐 Live Demo: https://mianhassam96.github.io/MianPix/
+
 
 🤝 Contribution
 
