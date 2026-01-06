@@ -24,7 +24,7 @@ Frontend	Libraries & Tools
 React 18	Framer Motion
 CSS3 / SCSS	React Icons (FontAwesome)
 React Router	React Toastify
-Pica	GitHub Pages
+Pica	GitHub Pages 
 
 ⚡ Installation & Setup
 
