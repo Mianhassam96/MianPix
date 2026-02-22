@@ -38,6 +38,7 @@ const BackgroundRemover = ({ image, onImageProcessed }) => {
       }
       toast.success('Background removed successfully!');
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Background removal error:', error);
       toast.error('Failed to remove background. Please try again.');
     } finally {

@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import ReactCrop from 'react-image-crop';
-import { FaCircle, FaSquare, FaDownload, FaPalette } from 'react-icons/fa';
+import { FaCircle, FaSquare, FaDownload } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { motion } from 'framer-motion';
 import './AvatarCreator.css';
@@ -27,13 +27,7 @@ const AvatarCreator = ({ imageSrc }) => {
   const imgRef = useRef(null);
   const previewCanvasRef = useRef(null);
 
-  useEffect(() => {
-    if (!completedCrop || !imgRef.current || !previewCanvasRef.current) return;
-    
-    generatePreview();
-  }, [completedCrop, avatarShape, backgroundColor, useGradient, gradientColor1, gradientColor2, borderWidth, borderColor, avatarSize]);
-
-  const generatePreview = () => {
+  const generatePreview = useCallback(() => {
     const image = imgRef.current;
     const canvas = previewCanvasRef.current;
     const crop = completedCrop;
@@ -93,7 +87,13 @@ const AvatarCreator = ({ imageSrc }) => {
         ctx.strokeRect(borderWidth / 2, borderWidth / 2, canvas.width - borderWidth, canvas.height - borderWidth);
       }
     }
-  };
+  }, [completedCrop, avatarShape, backgroundColor, useGradient, gradientColor1, gradientColor2, borderWidth, borderColor, avatarSize]);
+
+  useEffect(() => {
+    if (!completedCrop || !imgRef.current || !previewCanvasRef.current) return;
+    
+    generatePreview();
+  }, [completedCrop, generatePreview]);
 
   const handleDownload = () => {
     const canvas = previewCanvasRef.current;

@@ -132,11 +132,13 @@ const ImageEditor = ({ imageSrc, onReset }) => {
             toast.success('Image data URL copied to clipboard!');
           }
         } catch (err) {
+          // eslint-disable-next-line no-console
           console.error('Failed to copy:', err);
           toast.error('Failed to copy image. Try downloading instead.');
         }
       }, `image/${format}`, quality);
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.error('Failed to copy:', err);
       toast.error('Failed to copy image.');
     }
@@ -160,6 +162,7 @@ const ImageEditor = ({ imageSrc, onReset }) => {
             toast.success('Image shared successfully!');
           } catch (err) {
             if (err.name !== 'AbortError') {
+              // eslint-disable-next-line no-console
               console.error('Share failed:', err);
               toast.error('Failed to share image.');
             }
@@ -169,6 +172,7 @@ const ImageEditor = ({ imageSrc, onReset }) => {
         }
       }, `image/${format}`, quality);
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.error('Share failed:', err);
       toast.error('Failed to share image.');
     }
