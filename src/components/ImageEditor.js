@@ -114,9 +114,6 @@ const ImageEditor = ({ imageSrc, onReset }) => {
 
       canvas.toBlob(async (blob) => {
         try {
-          // Create a File object from the blob
-          const file = new File([blob], `mianpix-edited.${format}`, { type: blob.type });
-          
           // Try to use the Clipboard API
           if (navigator.clipboard && navigator.clipboard.write) {
             await navigator.clipboard.write([
