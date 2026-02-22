@@ -222,3 +222,29 @@ body.dark .preview-panel {
   background-color: #1e1e1e;
   color: #eee;
 }
+
+.share-btn {
+  background-color: #17a2b8 !important;
+  color: white !important;
+  border: none !important;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.share-btn:hover {
+  background-color: #138496 !important;
+  transform: scale(1.03);
+}
+
+.copy-btn {
+  background-color: #6c757d !important;
+  color: white !important;
+  border: none !important;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.copy-btn:hover {
+  background-color: #5a6268 !important;
+  transform: scale(1.03);
+}

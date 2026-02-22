@@ -1,26 +1,27 @@
 {
   "name": "mianpix",
-  "version": "1.0.0",
-  "description": "A simple online image editing tool",
+  "version": "2.0.0",
+  "description": "A professional online image editing tool with avatar creator and background remover",
   "private": true,
   "homepage": "https://Mianhassam96.github.io/MianPix",
   "dependencies": {
-    "framer-motion": "^10.16.16",
+    "@imgly/background-removal": "^1.7.0",
+    "framer-motion": "^11.15.0",
     "pica": "^9.0.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-dropzone": "^14.2.3",
-    "react-icons": "^4.12.0",
-    "react-image-crop": "^11.0.5",
-    "react-router-dom": "^6.20.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-dropzone": "^14.3.5",
+    "react-icons": "^5.4.0",
+    "react-image-crop": "^11.0.7",
+    "react-router-dom": "^7.1.1",
     "react-scripts": "5.0.1",
-    "react-toastify": "^9.1.3",
-    "web-vitals": "^3.5.0"
+    "react-toastify": "^10.0.6",
+    "web-vitals": "^4.2.4"
   },
   "devDependencies": {
-    "eslint": "^8.55.0",
-    "gh-pages": "^5.0.0",
-    "prettier": "^3.1.1"
+    "eslint": "^8.57.1",
+    "gh-pages": "^6.2.0",
+    "prettier": "^3.4.2"
   },
   "scripts": {
     "start": "react-scripts start",

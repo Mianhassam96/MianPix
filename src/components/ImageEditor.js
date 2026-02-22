@@ -2,12 +2,15 @@ import React, { useState, useRef, useEffect } from 'react';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import { motion } from 'framer-motion';
+import { toast } from 'react-toastify';
 import { 
   FaRedo, 
   FaArrowsAltH, 
   FaArrowsAltV,
   FaCrop,
-  FaDownload
+  FaDownload,
+  FaShare,
+  FaCopy
 } from 'react-icons/fa';
 import './ImageEditor.css';
 
@@ -97,10 +100,78 @@ const ImageEditor = ({ imageSrc, onReset }) => {
         link.href = url;
         link.click();
         URL.revokeObjectURL(url);
+        toast.success('Image downloaded successfully!');
       },
       mimeType,
       quality
     );
+  };
+
+  const handleCopyLink = async () => {
+    try {
+      const canvas = generateCanvas();
+      if (!canvas) return;
+
+      canvas.toBlob(async (blob) => {
+        try {
+          // Create a File object from the blob
+          const file = new File([blob], `mianpix-edited.${format}`, { type: blob.type });
+          
+          // Try to use the Clipboard API
+          if (navigator.clipboard && navigator.clipboard.write) {
+            await navigator.clipboard.write([
+              new ClipboardItem({
+                [blob.type]: blob
+              })
+            ]);
+            toast.success('Image copied to clipboard!');
+          } else {
+            // Fallback: create a data URL
+            const dataUrl = canvas.toDataURL(`image/${format}`, quality);
+            await navigator.clipboard.writeText(dataUrl);
+            toast.success('Image data URL copied to clipboard!');
+          }
+        } catch (err) {
+          console.error('Failed to copy:', err);
+          toast.error('Failed to copy image. Try downloading instead.');
+        }
+      }, `image/${format}`, quality);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+      toast.error('Failed to copy image.');
+    }
+  };
+
+  const handleShare = async () => {
+    try {
+      const canvas = generateCanvas();
+      if (!canvas) return;
+
+      canvas.toBlob(async (blob) => {
+        const file = new File([blob], `mianpix-edited.${format}`, { type: blob.type });
+        
+        if (navigator.share && navigator.canShare({ files: [file] })) {
+          try {
+            await navigator.share({
+              files: [file],
+              title: 'MianPix Edited Image',
+              text: 'Check out my edited image from MianPix!'
+            });
+            toast.success('Image shared successfully!');
+          } catch (err) {
+            if (err.name !== 'AbortError') {
+              console.error('Share failed:', err);
+              toast.error('Failed to share image.');
+            }
+          }
+        } else {
+          toast.info('Sharing not supported. Use copy or download instead.');
+        }
+      }, `image/${format}`, quality);
+    } catch (err) {
+      console.error('Share failed:', err);
+      toast.error('Failed to share image.');
+    }
   };
 
   const getImageStyle = () => ({
@@ -158,6 +229,8 @@ const ImageEditor = ({ imageSrc, onReset }) => {
 
         <div className="control-group actions">
           <button className="download-btn" onClick={handleDownload}><FaDownload /> Download</button>
+          <button className="share-btn" onClick={handleShare}><FaShare /> Share</button>
+          <button className="copy-btn" onClick={handleCopyLink}><FaCopy /> Copy</button>
           <button className="reset-btn" onClick={onReset}>Reset Image</button>
         </div>
       </motion.div>
