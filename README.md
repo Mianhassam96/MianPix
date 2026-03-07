@@ -8,8 +8,7 @@ Easily upload, crop, resize, compress, create avatars, remove backgrounds, and e
 =======
 MianPix is a fast, free, and responsive online image editor.
 Easily upload, crop, resize, compress, and edit images with a modern and intuitive interface.
->>>>>>> b93f1d7cec326880bbf99b29557f9f34272ebef0
-Supports Dark/Light mode toggle, social media links, and is fully responsive.
+
 
 
 🌟 Features
@@ -42,17 +41,6 @@ Supports Dark/Light mode toggle, social media links, and is fully responsive.
 - Real-time preview
 - Smooth animations with Framer Motion
 
-🛠 Technologies Used
-Frontend	Libraries & Tools
-React 18	Framer Motion
-CSS3	React Icons (FontAwesome)
-React Router	React Toastify
-<<<<<<< HEAD
-Pica	@imgly/background-removal
-React Image Crop	GitHub Pages
-=======
-Pica	GitHub Pages 
->>>>>>> b93f1d7cec326880bbf99b29557f9f34272ebef0
 
 ⚡ Installation & Setup
 
