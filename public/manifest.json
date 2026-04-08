@@ -1,7 +1,7 @@
 {
   "short_name": "MianPix",
-  "name": "MianPix - Online Image Editor",
-  "description": "Edit, resize, crop, and compress images online. Fast, free, and privacy-first.",
+  "name": "MianPix — Free Image Tools",
+  "description": "10 free browser-based image tools for developers & creators. Remove background, resize, compress, convert, favicon generator & more.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -11,24 +11,22 @@
     {
       "src": "logo192.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "any maskable"
     },
     {
       "src": "logo512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any maskable"
     }
   ],
-  "start_url": ".",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
-  "theme_color": "#007bff",
-  "background_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "theme_color": "#4f46e5",
+  "background_color": "#f9fafb",
   "categories": ["productivity", "utilities", "photo"],
-  "screenshots": [
-    {
-      "src": "screenshot.png",
-      "type": "image/png",
-      "sizes": "1280x720"
-    }
-  ]
+  "lang": "en"
 }

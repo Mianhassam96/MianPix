@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { FaDownload } from 'react-icons/fa';
+import { FaDownload, FaCopy } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { motion } from 'framer-motion';
 import ToolPage from '../components/ToolPage';
@@ -104,9 +104,21 @@ const CompressorTool = ({ imageSrc, previewSrc }) => {
             <div className="size-box compressed"><span>Compressed</span><strong>{formatBytes(result.size)}</strong></div>
             <div className="size-box saved"><span>Saved</span><strong>{result.saving}%</strong></div>
           </div>
-          <button className="tool-download-btn" onClick={download}>
-            <FaDownload /> Download JPG
-          </button>
+          <div className="tool-result-actions">
+            <button className="tool-download-btn" onClick={download}>
+              <FaDownload /> Download JPG
+            </button>
+            <button className="tool-copy-btn" onClick={async () => {
+              try {
+                const res = await fetch(result.url);
+                const blob = await res.blob();
+                await navigator.clipboard.write([new ClipboardItem({ [blob.type]: blob })]);
+                toast.success('Copied to clipboard!');
+              } catch { toast.info('Copy not supported. Use Download.'); }
+            }}>
+              <FaCopy /> Copy
+            </button>
+          </div>
         </motion.div>
       )}
     </div>

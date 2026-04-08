@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { FaEraser, FaDownload, FaSpinner } from 'react-icons/fa';
+import React, { useState, useRef } from 'react';
+import { FaEraser, FaDownload, FaSpinner, FaCopy } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { motion } from 'framer-motion';
 import ToolPage from '../components/ToolPage';
@@ -13,43 +13,45 @@ const STEPS = [
   'Finalizing…',
 ];
 
-/** Convert a data URL or object URL to a Blob without fetch() */
-const toBlob = (src) =>
+/**
+ * Reliably convert any image src (data URL, object URL, remote URL) to a Blob.
+ * Uses direct atob() for data URLs — no fetch() needed, works offline.
+ */
+const srcToBlob = (src) =>
   new Promise((resolve, reject) => {
-    // data URL — decode directly
-    if (src.startsWith('data:')) {
-      const [header, b64] = src.split(',');
-      const mime = header.match(/:(.*?);/)[1];
-      const bytes = atob(b64);
-      const arr = new Uint8Array(bytes.length);
-      for (let i = 0; i < bytes.length; i++) arr[i] = bytes.charCodeAt(i);
-      resolve(new Blob([arr], { type: mime }));
+    if (typeof src === 'string' && src.startsWith('data:')) {
+      try {
+        const [header, b64] = src.split(',');
+        const mime = header.match(/:(.*?);/)[1];
+        const binary = atob(b64);
+        const bytes = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+        resolve(new Blob([bytes], { type: mime }));
+      } catch (e) { reject(e); }
       return;
     }
-    // object URL or remote URL — use fetch with no-cors fallback via Image→Canvas
-    fetch(src)
-      .then(r => r.blob())
-      .then(resolve)
-      .catch(() => {
-        // fallback: draw to canvas and export
-        const img = new Image();
-        img.crossOrigin = 'anonymous';
-        img.onload = () => {
-          const c = document.createElement('canvas');
-          c.width = img.naturalWidth; c.height = img.naturalHeight;
-          c.getContext('2d').drawImage(img, 0, 0);
-          c.toBlob(b => b ? resolve(b) : reject(new Error('Canvas export failed')), 'image/png');
-        };
-        img.onerror = reject;
-        img.src = src;
-      });
+    // For object URLs or remote URLs, draw via canvas (avoids CORS fetch issues)
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      const c = document.createElement('canvas');
+      c.width = img.naturalWidth;
+      c.height = img.naturalHeight;
+      c.getContext('2d').drawImage(img, 0, 0);
+      c.toBlob(
+        b => (b ? resolve(b) : reject(new Error('Canvas toBlob failed'))),
+        'image/png'
+      );
+    };
+    img.onerror = () => reject(new Error('Image load failed'));
+    img.src = src;
   });
 
 const RemoveBg = () => (
   <ToolPage
     icon="🧹"
     title="Remove Background"
-    description="AI-powered background removal. Preview shown instantly, full-res PNG download."
+    description="AI-powered background removal. Instant preview, full-res transparent PNG download."
   >
     {(imageSrc, previewSrc) => <RemoveBgTool imageSrc={imageSrc} previewSrc={previewSrc} />}
   </ToolPage>
@@ -60,45 +62,79 @@ const RemoveBgTool = ({ imageSrc, previewSrc }) => {
   const [step, setStep] = useState(0);
   const [progress, setProgress] = useState(0);
   const [result, setResult] = useState(null);
+  const [resultBlob, setResultBlob] = useState(null);
   const [error, setError] = useState('');
+  const stepTimerRef = useRef(null);
+
+  const startStepTimer = () => {
+    let s = 0;
+    let p = 10;
+    stepTimerRef.current = setInterval(() => {
+      s = Math.min(s + 1, STEPS.length - 1);
+      p = Math.min(p + 15, 82);
+      setStep(s);
+      setProgress(p);
+    }, 2200);
+  };
+
+  const stopStepTimer = () => {
+    if (stepTimerRef.current) {
+      clearInterval(stepTimerRef.current);
+      stepTimerRef.current = null;
+    }
+  };
 
   const remove = async () => {
     setProcessing(true);
     setError('');
-    setProgress(10);
+    setResult(null);
+    setResultBlob(null);
+    setProgress(8);
     setStep(0);
-
-    const stepTimer = setInterval(() => {
-      setStep(s => Math.min(s + 1, STEPS.length - 1));
-      setProgress(p => Math.min(p + 18, 85));
-    }, 2000);
+    startStepTimer();
 
     try {
+      // Dynamic import — only loads when user clicks
       const { removeBackground } = await import('@imgly/background-removal');
-      const blob = await toBlob(imageSrc);
-      const out = await removeBackground(blob);
-      clearInterval(stepTimer);
+
+      // Convert src to blob without fetch()
+      const inputBlob = await srcToBlob(imageSrc);
+
+      // Run AI removal
+      const outputBlob = await removeBackground(inputBlob, {
+        // Use faster model config
+        model: 'small',
+        output: { format: 'image/png', quality: 1 },
+      });
+
+      stopStepTimer();
       setProgress(100);
-      setResult(URL.createObjectURL(out));
+
+      const url = URL.createObjectURL(outputBlob);
+      setResult(url);
+      setResultBlob(outputBlob);
       toast.success('Background removed!');
     } catch (err) {
-      clearInterval(stepTimer);
+      stopStepTimer();
+      setProgress(0);
       // eslint-disable-next-line no-console
       console.error('BG removal error:', err);
-      const msg = err?.message || '';
-      if (msg.includes('model') || msg.includes('fetch') || msg.includes('network')) {
-        setError('Network error loading AI model. Check your connection and try again.');
+      const msg = String(err?.message || err || '').toLowerCase();
+      if (msg.includes('fetch') || msg.includes('network') || msg.includes('load')) {
+        setError('Could not load AI model. Check your internet connection and try again.');
+      } else if (msg.includes('memory') || msg.includes('oom')) {
+        setError('Image too large for your device. Try a smaller image (under 2000×2000px).');
       } else {
         setError('Background removal failed. Try a different image or refresh the page.');
       }
       toast.error('Background removal failed.');
     } finally {
       setProcessing(false);
-      setProgress(0);
     }
   };
 
   const download = () => {
+    if (!result) return;
     const a = document.createElement('a');
     a.href = result;
     a.download = `mianpix-no-bg-${Date.now()}.png`;
@@ -106,20 +142,39 @@ const RemoveBgTool = ({ imageSrc, previewSrc }) => {
     toast.success('Downloaded!');
   };
 
+  const copyToClipboard = async () => {
+    if (!resultBlob) return;
+    try {
+      await navigator.clipboard.write([
+        new ClipboardItem({ 'image/png': resultBlob }),
+      ]);
+      toast.success('Image copied to clipboard!');
+    } catch {
+      toast.info('Copy not supported in this browser. Use Download instead.');
+    }
+  };
+
+  const reset = () => {
+    setResult(null);
+    setResultBlob(null);
+    setError('');
+    setProgress(0);
+  };
+
   return (
     <div className="background-remover">
-      {/* Instant preview */}
+      {/* Instant preview before processing */}
       {!result && (
         <div className="bg-preview-row">
           <img src={previewSrc || imageSrc} alt="original" className="bg-preview-img" />
         </div>
       )}
 
-      {/* Progress bar */}
+      {/* Progress */}
       {processing && (
         <motion.div className="bg-progress" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <div className="tp-progress">
-            <div className="tp-progress-fill" style={{ width: `${progress}%` }} />
+            <div className="tp-progress-fill" style={{ width: `${progress}%`, transition: 'width 0.4s ease' }} />
           </div>
           <p className="bg-step-label">
             <FaSpinner className="spinner" /> {STEPS[step]}
@@ -135,33 +190,38 @@ const RemoveBgTool = ({ imageSrc, previewSrc }) => {
         </motion.div>
       )}
 
-      <button className="remove-bg-btn" onClick={remove} disabled={processing}>
-        {processing
-          ? <><FaSpinner className="spinner" /> Processing…</>
-          : <><FaEraser /> Remove Background</>
-        }
-      </button>
+      {/* Main action button */}
+      {!result && (
+        <button className="remove-bg-btn" onClick={remove} disabled={processing}>
+          {processing
+            ? <><FaSpinner className="spinner" /> Processing…</>
+            : <><FaEraser /> Remove Background</>
+          }
+        </button>
+      )}
 
+      {/* Result */}
       {result && (
         <motion.div className="processed-preview" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <BeforeAfter beforeImage={previewSrc || imageSrc} afterImage={result} />
-          <button className="download-btn" onClick={download} style={{ marginTop: '1rem' }}>
-            <FaDownload /> Download Full-Res PNG
-          </button>
-          <button
-            className="remove-bg-btn"
-            onClick={() => { setResult(null); setError(''); }}
-            style={{ marginTop: '0.5rem', background: 'var(--color-text-secondary)' }}
-          >
-            Try Again
-          </button>
+          <div className="bg-result-actions">
+            <button className="download-btn" onClick={download}>
+              <FaDownload /> Download PNG
+            </button>
+            <button className="bg-copy-btn" onClick={copyToClipboard}>
+              <FaCopy /> Copy to Clipboard
+            </button>
+            <button className="bg-retry-btn" onClick={reset}>
+              ↩ Try Again
+            </button>
+          </div>
         </motion.div>
       )}
 
       <p className="info-text">
         All processing happens in your browser. Your image never leaves your device.
         <br />
-        <small>Note: First use downloads the AI model (~50 MB). Subsequent uses are instant.</small>
+        <small>First use downloads the AI model (~25 MB). Subsequent uses are instant.</small>
       </p>
     </div>
   );

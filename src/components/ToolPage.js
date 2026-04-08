@@ -1,6 +1,6 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FaArrowLeft, FaUpload, FaTimesCircle, FaCheckCircle } from 'react-icons/fa';
+import { FaArrowLeft, FaUpload, FaTimesCircle, FaCheckCircle, FaClipboard } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useDropzone } from 'react-dropzone';
 import { pageVariants } from '../animations/pageVariants';
@@ -11,11 +11,12 @@ import './ToolPage.css';
 const ToolPage = ({ icon, title, description, children, noUpload = false }) => {
   const { theme } = useTheme();
   const [imageSrc, setImageSrc] = useState(null);
-  const [previewSrc, setPreviewSrc] = useState(null); // low-res for instant display
+  const [previewSrc, setPreviewSrc] = useState(null);
   const [urlInput, setUrlInput] = useState('');
   const [error, setError] = useState('');
   const [fileInfo, setFileInfo] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [pasteHint, setPasteHint] = useState(false);
 
   const processFile = useCallback(async (file) => {
     setError('');
@@ -41,6 +42,30 @@ const ToolPage = ({ icon, title, description, children, noUpload = false }) => {
     if (accepted.length) processFile(accepted[0]);
   }, [processFile]);
 
+  // Ctrl+V paste from clipboard
+  useEffect(() => {
+    if (imageSrc || noUpload) return;
+    const handlePaste = (e) => {
+      const items = e.clipboardData?.items;
+      if (!items) return;
+      for (const item of items) {
+        if (item.type.startsWith('image/')) {
+          const file = item.getAsFile();
+          if (file) { processFile(file); break; }
+        }
+      }
+    };
+    window.addEventListener('paste', handlePaste);
+    return () => window.removeEventListener('paste', handlePaste);
+  }, [imageSrc, noUpload, processFile]);
+
+  // Show paste hint after 1.5s on upload screen
+  useEffect(() => {
+    if (imageSrc || noUpload) return;
+    const t = setTimeout(() => setPasteHint(true), 1500);
+    return () => clearTimeout(t);
+  }, [imageSrc, noUpload]);
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: { 'image/*': ['.png', '.jpg', '.jpeg', '.gif', '.webp'] },
@@ -63,6 +88,7 @@ const ToolPage = ({ icon, title, description, children, noUpload = false }) => {
     setPreviewSrc(null);
     setFileInfo(null);
     setError('');
+    setPasteHint(false);
   };
 
   return (
@@ -85,8 +111,8 @@ const ToolPage = ({ icon, title, description, children, noUpload = false }) => {
         </div>
       </div>
 
-      {/* Upload */}
       <AnimatePresence mode="wait">
+        {/* Upload screen */}
         {!noUpload && !imageSrc && (
           <motion.div
             key="upload"
@@ -95,7 +121,10 @@ const ToolPage = ({ icon, title, description, children, noUpload = false }) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
           >
-            <div {...getRootProps()} className={`tp-dropzone ${isDragActive ? 'active' : ''} ${loading ? 'loading' : ''}`}>
+            <div
+              {...getRootProps()}
+              className={`tp-dropzone ${isDragActive ? 'active' : ''} ${loading ? 'loading' : ''}`}
+            >
               <input {...getInputProps()} />
               {loading
                 ? <div className="tp-spinner" />
@@ -104,6 +133,17 @@ const ToolPage = ({ icon, title, description, children, noUpload = false }) => {
               <p>{loading ? 'Loading image…' : isDragActive ? 'Drop it here!' : 'Drag & drop an image, or click to select'}</p>
               <span>PNG · JPG · WEBP · GIF · Max 5 MB</span>
             </div>
+
+            {/* Paste hint */}
+            {pasteHint && !loading && (
+              <motion.div
+                className="tp-paste-hint"
+                initial={{ opacity: 0, y: 4 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                <FaClipboard /> Press <kbd>Ctrl+V</kbd> to paste an image from clipboard
+              </motion.div>
+            )}
 
             {error && (
               <motion.div className="tp-error" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
@@ -133,7 +173,6 @@ const ToolPage = ({ icon, title, description, children, noUpload = false }) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
           >
-            {/* File info bar */}
             {fileInfo && (
               <div className="tp-file-info">
                 <FaCheckCircle className="tp-file-ok" />
