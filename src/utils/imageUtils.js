@@ -2,6 +2,62 @@ import Pica from 'pica';
 
 const pica = Pica();
 
+/** Max file size: 5 MB */
+export const MAX_FILE_SIZE = 5 * 1024 * 1024;
+
+/** Max dimension for processing */
+export const MAX_DIMENSION = 4000;
+
+/**
+ * Validate image file — returns error string or null
+ */
+export const validateImage = (file) => {
+  if (file && file.size > MAX_FILE_SIZE) {
+    return `Image too large (${(file.size / 1024 / 1024).toFixed(1)} MB). Max 5 MB.`;
+  }
+  return null;
+};
+
+/**
+ * Generate a low-res preview (max 600px wide) from a data URL for instant display.
+ * Returns a smaller data URL.
+ */
+export const makePreview = (dataUrl, maxW = 600) => {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      const scale = Math.min(1, maxW / img.naturalWidth);
+      const w = Math.round(img.naturalWidth * scale);
+      const h = Math.round(img.naturalHeight * scale);
+      const canvas = document.createElement('canvas');
+      canvas.width = w;
+      canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      resolve(canvas.toDataURL('image/jpeg', 0.7));
+    };
+    img.onerror = () => resolve(dataUrl);
+    img.src = dataUrl;
+  });
+};
+
+/**
+ * Format bytes to human-readable string
+ */
+export const formatBytes = (bytes) => {
+  if (!bytes) return '0 B';
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+};
+
+/**
+ * Get approximate size of a data URL in bytes
+ */
+export const dataUrlSize = (dataUrl) => {
+  const base64 = dataUrl.split(',')[1] || dataUrl;
+  return Math.round((base64.length * 3) / 4);
+};
+
 /**
  * Resize image using high-quality pica algorithm
  */

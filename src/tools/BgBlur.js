@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { FaDownload } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { motion } from 'framer-motion';
@@ -6,57 +6,97 @@ import ToolPage from '../components/ToolPage';
 import './tools.css';
 
 const BgBlur = () => (
-  <ToolPage icon="🌫️" title="Background Blur" description="Apply a soft portrait-mode blur to your image background.">
-    {(imageSrc) => <BgBlurTool imageSrc={imageSrc} />}
+  <ToolPage icon="🌫️" title="Background Blur" description="Portrait-mode blur — sharp center, soft background. Slider updates preview instantly.">
+    {(imageSrc, previewSrc) => <BgBlurTool imageSrc={imageSrc} previewSrc={previewSrc} />}
   </ToolPage>
 );
 
-const BgBlurTool = ({ imageSrc }) => {
+const BgBlurTool = ({ imageSrc, previewSrc }) => {
   const [blur, setBlur] = useState(8);
-  const [result, setResult] = useState(null);
-  const canvasRef = useRef(null);
-  const imgRef = useRef(null);
+  const [livePreview, setLivePreview] = useState(null);
+  const [fullResult, setFullResult] = useState(null);
+  const [processing, setProcessing] = useState(false);
+  const previewCanvasRef = useRef(null);
+  const fullCanvasRef = useRef(null);
+  const previewImgRef = useRef(null);
+  const fullImgRef = useRef(null);
 
-  useEffect(() => { if (imageSrc) apply(); }, []); // eslint-disable-line
-
-  const apply = () => {
-    const img = imgRef.current;
-    if (!img || !img.complete) return;
-    const canvas = canvasRef.current;
+  // Apply blur to a canvas from an img element
+  const applyBlur = useCallback((img, canvas, blurVal) => {
+    if (!img?.complete || !canvas) return null;
     const w = img.naturalWidth, h = img.naturalHeight;
     canvas.width = w; canvas.height = h;
     const ctx = canvas.getContext('2d');
-
-    // Draw blurred full image
-    ctx.filter = `blur(${blur}px)`;
+    ctx.filter = `blur(${blurVal}px)`;
     ctx.drawImage(img, 0, 0, w, h);
     ctx.filter = 'none';
-
-    // Draw sharp center ellipse (portrait focus)
     const cx = w / 2, cy = h / 2;
-    const rx = w * 0.35, ry = h * 0.45;
     ctx.save();
     ctx.beginPath();
-    ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+    ctx.ellipse(cx, cy, w * 0.35, h * 0.45, 0, 0, Math.PI * 2);
     ctx.clip();
     ctx.drawImage(img, 0, 0, w, h);
     ctx.restore();
+    return canvas.toDataURL('image/jpeg', 0.82);
+  }, []);
 
-    setResult(canvas.toDataURL('image/jpeg', 0.92));
-    toast.success('Blur applied!');
+  // Live preview on slider change (uses low-res preview image)
+  useEffect(() => {
+    const img = previewImgRef.current;
+    const canvas = previewCanvasRef.current;
+    if (!img?.complete || !canvas) return;
+    const result = applyBlur(img, canvas, blur);
+    if (result) setLivePreview(result);
+  }, [blur, applyBlur]);
+
+  const handlePreviewLoad = () => {
+    const result = applyBlur(previewImgRef.current, previewCanvasRef.current, blur);
+    if (result) setLivePreview(result);
+  };
+
+  const applyFull = () => {
+    setProcessing(true);
+    const img = fullImgRef.current;
+    if (!img?.complete) {
+      img.onload = () => {
+        const result = applyBlur(img, fullCanvasRef.current, blur);
+        setFullResult(result);
+        setProcessing(false);
+        toast.success('Full-res blur applied!');
+      };
+    } else {
+      const result = applyBlur(img, fullCanvasRef.current, blur);
+      setFullResult(result);
+      setProcessing(false);
+      toast.success('Full-res blur applied!');
+    }
   };
 
   const download = () => {
+    const src = fullResult || livePreview;
+    if (!src) return;
     const a = document.createElement('a');
-    a.href = result;
+    a.href = src;
     a.download = `mianpix-blur-${Date.now()}.jpg`;
     a.click();
+    toast.success('Downloaded!');
   };
 
   return (
     <div className="tool-inner">
-      <img ref={imgRef} src={imageSrc} alt="" style={{ display: 'none' }} onLoad={apply} />
-      <canvas ref={canvasRef} style={{ display: 'none' }} />
+      {/* Hidden images */}
+      <img ref={previewImgRef} src={previewSrc || imageSrc} alt="" style={{ display: 'none' }} onLoad={handlePreviewLoad} />
+      <img ref={fullImgRef} src={imageSrc} alt="" style={{ display: 'none' }} />
+      <canvas ref={previewCanvasRef} style={{ display: 'none' }} />
+      <canvas ref={fullCanvasRef} style={{ display: 'none' }} />
+
+      {/* Live preview */}
+      <div className="tool-preview-row">
+        {livePreview
+          ? <img src={livePreview} alt="blur preview" className="tool-preview-img" />
+          : <img src={previewSrc || imageSrc} alt="original" className="tool-preview-img" />
+        }
+      </div>
 
       <div className="tool-controls">
         <label className="ctrl-label">
@@ -64,23 +104,16 @@ const BgBlurTool = ({ imageSrc }) => {
           <input type="range" min="1" max="30" value={blur}
             onChange={e => setBlur(parseInt(e.target.value))} />
         </label>
-        <button className="tool-action-btn" onClick={apply}>⚡ Apply Blur</button>
+        <p className="ctrl-hint">Preview updates live. Click below for full-resolution output.</p>
+        <button className="tool-action-btn" onClick={applyFull} disabled={processing}>
+          {processing ? 'Processing…' : '⚡ Apply Full Resolution'}
+        </button>
       </div>
 
-      {result && (
+      {(fullResult || livePreview) && (
         <motion.div className="tool-result" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <div className="before-after-simple">
-            <div>
-              <p className="ba-label">Before</p>
-              <img src={imageSrc} alt="before" className="tool-result-img" />
-            </div>
-            <div>
-              <p className="ba-label">After</p>
-              <img src={result} alt="after" className="tool-result-img" />
-            </div>
-          </div>
           <button className="tool-download-btn" onClick={download}>
-            <FaDownload /> Download
+            <FaDownload /> Download {fullResult ? 'Full-Res' : 'Preview'}
           </button>
         </motion.div>
       )}

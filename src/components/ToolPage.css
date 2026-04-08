@@ -169,3 +169,93 @@
   .tp-url-row { flex-direction: column; }
   .tp-title-row { gap: 0.75rem; }
 }
+
+/* Spinner inside dropzone */
+.tp-dropzone.loading { cursor: wait; opacity: 0.8; }
+
+.tp-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: tp-spin 0.7s linear infinite;
+  margin-bottom: 0.75rem;
+}
+
+@keyframes tp-spin { to { transform: rotate(360deg); } }
+
+/* Error */
+.tp-error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
+  background: rgba(239,68,68,0.1);
+  border: 1px solid var(--color-danger);
+  border-radius: 8px;
+  color: var(--color-danger);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* File info bar */
+.tp-file-info {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.9rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  margin-bottom: 1.25rem;
+  font-size: 0.85rem;
+}
+
+.tp-file-ok { color: var(--color-success); flex-shrink: 0; }
+
+.tp-file-name {
+  flex: 1;
+  color: var(--color-text);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tp-file-size {
+  color: var(--color-text-secondary);
+  font-family: monospace;
+  flex-shrink: 0;
+}
+
+.tp-file-reset {
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 0.1rem 0.3rem;
+  border-radius: 4px;
+  transition: color 0.15s;
+  flex-shrink: 0;
+}
+
+.tp-file-reset:hover { color: var(--color-danger); }
+
+/* Progress bar utility */
+.tp-progress {
+  width: 100%;
+  height: 4px;
+  background: var(--color-border);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.tp-progress-fill {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}

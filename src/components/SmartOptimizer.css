@@ -243,3 +243,26 @@
   .stat-arrow { transform: rotate(90deg); text-align: center; }
   .stat-box { flex-direction: row; justify-content: space-between; }
 }
+
+/* Live size estimate bar */
+.opt-live-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 1rem;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.opt-live-bar strong { color: var(--color-text); }
+.opt-arrow { color: var(--color-text-secondary); }
+.opt-saving {
+  margin-left: auto;
+  font-weight: 700;
+  color: var(--color-success);
+}

@@ -116,3 +116,33 @@
     font-size: 0.95rem;
   }
 }
+
+/* Preview row before processing */
+.bg-preview-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.bg-preview-img {
+  max-width: 100%;
+  max-height: 280px;
+  object-fit: contain;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-small);
+}
+
+/* Progress */
+.bg-progress {
+  margin-bottom: 1rem;
+}
+
+.bg-step-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  margin-top: 0.5rem;
+}

@@ -1,29 +1,33 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import { FaDownload, FaBolt } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-import { resizeImage, canvasToBlob } from '../utils/imageUtils';
+import { resizeImage, canvasToBlob, formatBytes, dataUrlSize } from '../utils/imageUtils';
 import './SmartOptimizer.css';
 
 const SmartOptimizer = ({ imageSrc }) => {
   const [quality, setQuality] = useState(0.8);
   const [format, setFormat] = useState('webp');
   const [maxWidth, setMaxWidth] = useState(1920);
+  const [liveSize, setLiveSize] = useState(null);
   const [result, setResult] = useState(null);
   const [processing, setProcessing] = useState(false);
   const imgRef = useRef(null);
+  const origSize = dataUrlSize(imageSrc);
 
-  const formatBytes = (bytes) => {
-    if (bytes < 1024) return `${bytes} B`;
-    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
-    return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
-  };
+  const estimateLive = useCallback(async () => {
+    const img = imgRef.current;
+    if (!img?.complete) return;
+    const tw = Math.min(img.naturalWidth, maxWidth);
+    const th = Math.round(img.naturalHeight * (tw / img.naturalWidth));
+    const canvas = document.createElement('canvas');
+    canvas.width = tw; canvas.height = th;
+    canvas.getContext('2d').drawImage(img, 0, 0, tw, th);
+    const blob = await canvasToBlob(canvas, format, quality);
+    setLiveSize(blob.size);
+  }, [quality, format, maxWidth]);
 
-  const getOriginalSize = () => {
-    if (!imageSrc) return 0;
-    const base64 = imageSrc.split(',')[1] || imageSrc;
-    return Math.round((base64.length * 3) / 4);
-  };
+  useEffect(() => { estimateLive(); }, [estimateLive]);
 
   const optimize = async () => {
     if (!imageSrc) { toast.error('Upload an image first'); return; }
@@ -31,27 +35,17 @@ const SmartOptimizer = ({ imageSrc }) => {
     try {
       const img = imgRef.current;
       if (!img) throw new Error('Image not loaded');
-
       const targetW = Math.min(img.naturalWidth, maxWidth);
       const targetH = Math.round(img.naturalHeight * (targetW / img.naturalWidth));
-
       const canvas = await resizeImage(img, targetW, targetH);
       if (!canvas) throw new Error('Resize failed');
-
       const blob = await canvasToBlob(canvas, format, quality);
       const url = URL.createObjectURL(blob);
-      const originalSize = getOriginalSize();
-      const saving = originalSize > 0
-        ? Math.round((1 - blob.size / originalSize) * 100)
-        : 0;
-
-      setResult({ url, size: blob.size, originalSize, saving, w: targetW, h: targetH, format, blob });
+      const saving = origSize > 0 ? Math.round((1 - blob.size / origSize) * 100) : 0;
+      setResult({ url, size: blob.size, originalSize: origSize, saving, w: targetW, h: targetH, format });
       toast.success(`Optimized! Saved ${saving}%`);
-    } catch (err) {
-      toast.error('Optimization failed. Try again.');
-    } finally {
-      setProcessing(false);
-    }
+    } catch { toast.error('Optimization failed. Try again.'); }
+    finally { setProcessing(false); }
   };
 
   const download = () => {
@@ -65,12 +59,24 @@ const SmartOptimizer = ({ imageSrc }) => {
 
   return (
     <motion.div className="smart-optimizer" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-      <img ref={imgRef} src={imageSrc} alt="" style={{ display: 'none' }} crossOrigin="anonymous" />
+      <img ref={imgRef} src={imageSrc} alt="" style={{ display: 'none' }} crossOrigin="anonymous" onLoad={estimateLive} />
 
       <div className="optimizer-header">
         <h3><FaBolt /> Smart Image Optimizer</h3>
-        <p>Compress, convert to WebP, and resize — all in one click</p>
+        <p>Compress, convert to WebP, and resize — sliders update size estimate instantly</p>
       </div>
+
+      {/* Live size estimate */}
+      {liveSize !== null && (
+        <div className="opt-live-bar">
+          <span>Original: <strong>{formatBytes(origSize)}</strong></span>
+          <span className="opt-arrow">→</span>
+          <span>Estimated: <strong>{formatBytes(liveSize)}</strong></span>
+          <span className="opt-saving">
+            ~{Math.max(0, Math.round((1 - liveSize / origSize) * 100))}% saved
+          </span>
+        </div>
+      )}
 
       <div className="optimizer-controls">
         <div className="opt-control">
@@ -98,7 +104,7 @@ const SmartOptimizer = ({ imageSrc }) => {
       </div>
 
       <button className="optimize-btn" onClick={optimize} disabled={processing || !imageSrc}>
-        {processing ? 'Optimizing...' : '⚡ Optimize Now'}
+        {processing ? 'Optimizing...' : '⚡ Optimize & Download'}
       </button>
 
       {result && (
