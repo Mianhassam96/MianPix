@@ -233,3 +233,100 @@
     height: 20px;
   }
 }
+
+/* ── Dropdown ── */
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: none;
+  border: none;
+  color: var(--color-text);
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s;
+  font-family: inherit;
+}
+
+.nav-dropdown-trigger:hover,
+.nav-dropdown-trigger.open { color: var(--color-primary); }
+
+.nav-chevron {
+  font-size: 0.7rem;
+  transition: transform 0.2s;
+}
+
+.nav-dropdown-trigger.open .nav-chevron { transform: rotate(180deg); }
+
+.nav-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 0.75rem);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-large);
+  z-index: 1000;
+  min-width: 480px;
+  padding: 1rem;
+  animation: dropIn 0.18s ease;
+}
+
+@keyframes dropIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(-8px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.nav-dropdown-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.35rem;
+}
+
+.nav-tool-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--color-text);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.15s;
+}
+
+.nav-tool-item:hover {
+  background: var(--color-background);
+  color: var(--color-primary);
+}
+
+.nav-tool-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+/* Mobile dropdown */
+@media (max-width: 768px) {
+  .nav-dropdown-menu {
+    position: fixed;
+    top: 70px;
+    left: 1rem;
+    right: 1rem;
+    transform: none;
+    min-width: unset;
+  }
+
+  @keyframes dropIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-dropdown-grid { grid-template-columns: 1fr; }
+}

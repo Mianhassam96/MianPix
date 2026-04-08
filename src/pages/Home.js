@@ -1,48 +1,32 @@
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  FaImage, FaCompress, FaCrop, FaDownload,
-  FaUserCircle, FaEraser, FaLock, FaBolt,
-  FaHeart, FaArrowRight, FaEyeDropper, FaCode,
-  FaGlobe, FaPalette
-} from 'react-icons/fa';
+import { FaSearch, FaArrowRight, FaLock, FaBolt, FaHeart } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { pageVariants } from '../animations/pageVariants';
 import { useTheme } from '../context/ThemeContext';
 import './Home.css';
 
+const TOOLS = [
+  { id: 'remove-bg',   icon: '🧹', title: 'Remove Background',      desc: 'AI-powered transparent background removal',    color: '#ef4444', path: '/tools/remove-bg'   },
+  { id: 'resize',      icon: '📐', title: 'Smart Resize',            desc: 'Instagram, YouTube, blog & custom sizes',      color: '#3b82f6', path: '/tools/resize'      },
+  { id: 'bg-blur',     icon: '🌫️', title: 'Background Blur',         desc: 'Portrait-mode soft blur effect',               color: '#8b5cf6', path: '/tools/bg-blur'     },
+  { id: 'thumbnail',   icon: '🖼️', title: 'Thumbnail Maker',         desc: 'YouTube, blog & social thumbnails',            color: '#f59e0b', path: '/tools/thumbnail'   },
+  { id: 'compress',    icon: '🗜️', title: 'Image Compressor',        desc: 'Reduce file size, keep quality',               color: '#10b981', path: '/tools/compress'    },
+  { id: 'convert',     icon: '🔄', title: 'Format Converter',        desc: 'PNG ↔ JPG ↔ WEBP instantly',                  color: '#06b6d4', path: '/tools/convert'     },
+  { id: 'optimizer',   icon: '⚡', title: 'Web Optimizer',           desc: 'Convert to WebP + compress for web',           color: '#f97316', path: '/tools/optimizer'   },
+  { id: 'profile',     icon: '👤', title: 'Profile Picture Maker',   desc: 'Circle crop with gradients & borders',         color: '#ec4899', path: '/tools/profile'     },
+  { id: 'palette',     icon: '🎨', title: 'Color Palette Extractor', desc: 'Extract hex codes & generate gradients',       color: '#a855f7', path: '/tools/palette'     },
+  { id: 'favicon',     icon: '🔖', title: 'Favicon Generator',       desc: 'All sizes + HTML snippet + ZIP download',      color: '#14b8a6', path: '/tools/favicon'     },
+];
+
 const Home = () => {
   const { theme } = useTheme();
+  const [query, setQuery] = useState('');
 
-  const features = [
-    { icon: <FaCrop />,        title: 'Crop & Resize',         desc: 'Precisely crop and resize to any dimension', color: '#3b82f6' },
-    { icon: <FaCompress />,    title: 'Smart Optimizer',       desc: 'Compress + convert to WebP with size savings', color: '#10b981' },
-    { icon: <FaUserCircle />,  title: 'Avatar Creator',        desc: 'Create profile pictures with custom backgrounds', color: '#8b5cf6' },
-    { icon: <FaEraser />,      title: 'Remove Background',     desc: 'AI-powered one-click background removal', color: '#ef4444' },
-    { icon: <FaImage />,       title: 'Thumbnail Generator',   desc: 'YouTube, blog, social thumbnails in one click', color: '#f59e0b' },
-    { icon: <FaEyeDropper />,  title: 'Color Palette',         desc: 'Extract colors & gradients from any image', color: '#06b6d4' },
-    { icon: <FaCode />,        title: 'Favicon Generator',     desc: 'All favicon sizes + HTML snippet for devs', color: '#ec4899' },
-    { icon: <FaGlobe />,       title: 'Live Website Preview',  desc: 'See your image in blog, hero & OG card mockups', color: '#14b8a6' },
-    { icon: <FaPalette />,     title: 'Multiple Formats',      desc: 'Export PNG, JPG, WEBP instantly', color: '#a855f7' },
-    { icon: <FaDownload />,    title: 'Quick Download',        desc: 'Download or share with a single click', color: '#64748b' },
-  ];
-
-  const benefits = [
-    {
-      icon: <FaLock />,
-      title: 'Privacy First',
-      desc: 'All processing happens in your browser. Your images never leave your device.'
-    },
-    {
-      icon: <FaBolt />,
-      title: 'Lightning Fast',
-      desc: 'No uploads, no waiting. Edit images instantly with client-side processing.'
-    },
-    {
-      icon: <FaHeart />,
-      title: 'Completely Free',
-      desc: 'No subscriptions, no hidden fees. Professional tools, absolutely free.'
-    }
-  ];
+  const filtered = TOOLS.filter(t =>
+    t.title.toLowerCase().includes(query.toLowerCase()) ||
+    t.desc.toLowerCase().includes(query.toLowerCase())
+  );
 
   return (
     <motion.div
@@ -52,167 +36,101 @@ const Home = () => {
       animate="animate"
       exit="exit"
     >
-      {/* Hero Section */}
-      <section className="hero">
-        <div className="hero-container">
-          <motion.div
-            className="hero-content"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <motion.div
-              className="hero-badge"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-            >
-              <FaBolt /> Image Tools for Developers & Creators
-            </motion.div>
+      {/* Hero */}
+      <section className="home-hero">
+        <motion.div
+          className="home-hero-inner"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <span className="home-badge"><FaBolt /> Simple & Powerful Image Tools</span>
+          <h1 className="home-title">
+            MianPix
+            <span className="gradient-text"> — Image Tools</span>
+          </h1>
+          <p className="home-subtitle">
+            10 focused tools for developers & creators. No sign-up. No uploads to servers. 100% free.
+          </p>
 
-            <h1 className="hero-title">
-              MianPix — More Than
-              <span className="gradient-text"> an Image Editor</span>
-            </h1>
-
-            <p className="hero-subtitle">
-              Thumbnail generator, favicon creator, color palette extractor, live website preview,
-              smart optimizer & more — all in your browser. Free, fast, private.
-            </p>
-
-            <div className="hero-buttons">
-              <Link to="/tool" className="btn btn-primary">
-                Open Tools <FaArrowRight />
-              </Link>
-              <Link to="/about" className="btn btn-secondary">
-                Learn More
-              </Link>
-            </div>
-
-            <div className="hero-stats">
-              <div className="stat">
-                <span className="stat-number">8</span>
-                <span className="stat-label">Tools</span>
-              </div>
-              <div className="stat">
-                <span className="stat-number">100%</span>
-                <span className="stat-label">Free</span>
-              </div>
-              <div className="stat">
-                <span className="stat-number">0</span>
-                <span className="stat-label">Uploads</span>
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.div
-            className="hero-visual"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <div className="visual-card">
-              <div className="visual-icon"><FaImage /></div>
-              <div className="visual-features">
-                <div className="visual-feature">✓ Thumbnail Generator</div>
-                <div className="visual-feature">✓ Favicon Creator</div>
-                <div className="visual-feature">✓ Color Palette</div>
-                <div className="visual-feature">✓ Live Preview</div>
-                <div className="visual-feature">✓ Smart Optimizer</div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
+          {/* Search */}
+          <div className="home-search">
+            <FaSearch className="search-icon" />
+            <input
+              type="text"
+              placeholder="Search tools…"
+              value={query}
+              onChange={e => setQuery(e.target.value)}
+            />
+            {query && (
+              <button className="search-clear" onClick={() => setQuery('')}>✕</button>
+            )}
+          </div>
+        </motion.div>
       </section>
 
-      {/* Features Section */}
-      <section className="features-section">
-        <div className="section-container">
-          <motion.div
-            className="section-header"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <h2 className="section-title">10 Powerful Tools</h2>
-            <p className="section-subtitle">
-              Everything developers & creators need — in one place
+      {/* Tools Grid */}
+      <section className="tools-section">
+        <div className="tools-container">
+          {query && (
+            <p className="search-results-label">
+              {filtered.length} result{filtered.length !== 1 ? 's' : ''} for "{query}"
             </p>
-          </motion.div>
+          )}
+          {!query && <h2 className="tools-grid-title">All Tools</h2>}
 
-          <div className="features-grid">
-            {features.map((feature, index) => (
+          <div className="tools-grid">
+            {filtered.map((tool, i) => (
               <motion.div
-                key={index}
-                className="feature-card"
-                initial={{ opacity: 0, y: 30 }}
+                key={tool.id}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.07 }}
-                whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                transition={{ duration: 0.35, delay: i * 0.05 }}
               >
-                <div className="feature-icon" style={{ color: feature.color }}>
-                  {feature.icon}
-                </div>
-                <h3 className="feature-title">{feature.title}</h3>
-                <p className="feature-desc">{feature.desc}</p>
+                <Link to={tool.path} className="tool-card" style={{ '--tool-color': tool.color }}>
+                  <div className="tool-card-icon">{tool.icon}</div>
+                  <div className="tool-card-body">
+                    <h3 className="tool-card-title">{tool.title}</h3>
+                    <p className="tool-card-desc">{tool.desc}</p>
+                  </div>
+                  <FaArrowRight className="tool-card-arrow" />
+                </Link>
               </motion.div>
             ))}
           </div>
+
+          {filtered.length === 0 && (
+            <div className="no-results">
+              <p>No tools found for "{query}"</p>
+              <button onClick={() => setQuery('')}>Clear search</button>
+            </div>
+          )}
         </div>
       </section>
 
-      {/* Benefits Section */}
-      <section className="benefits-section">
-        <div className="section-container">
-          <motion.div
-            className="section-header"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <h2 className="section-title">Why Choose MianPix?</h2>
-            <p className="section-subtitle">Built with your privacy and convenience in mind</p>
-          </motion.div>
-
-          <div className="benefits-grid">
-            {benefits.map((benefit, index) => (
-              <motion.div
-                key={index}
-                className="benefit-card"
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.15 }}
-              >
-                <div className="benefit-icon">{benefit.icon}</div>
-                <h3 className="benefit-title">{benefit.title}</h3>
-                <p className="benefit-desc">{benefit.desc}</p>
-              </motion.div>
-            ))}
-          </div>
+      {/* Why section */}
+      <section className="why-section">
+        <div className="why-container">
+          {[
+            { icon: <FaLock />, title: 'Privacy First',    desc: 'All processing in your browser. Images never leave your device.' },
+            { icon: <FaBolt />, title: 'Lightning Fast',   desc: 'No uploads, no waiting. Instant client-side processing.' },
+            { icon: <FaHeart />, title: 'Completely Free', desc: 'No subscriptions, no hidden fees. Professional tools, free forever.' },
+          ].map((b, i) => (
+            <motion.div
+              key={i}
+              className="why-card"
+              initial={{ opacity: 0, scale: 0.92 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.12 }}
+            >
+              <div className="why-icon">{b.icon}</div>
+              <h3>{b.title}</h3>
+              <p>{b.desc}</p>
+            </motion.div>
+          ))}
         </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="cta-section">
-        <motion.div
-          className="cta-container"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="cta-title">Ready to Use All 8 Tools?</h2>
-          <p className="cta-subtitle">
-            No sign-up. No uploads. Completely free. Built for developers & creators.
-          </p>
-          <Link to="/tool" className="btn btn-cta">
-            Open MianPix Tools <FaArrowRight />
-          </Link>
-        </motion.div>
       </section>
     </motion.div>
   );
