@@ -16,9 +16,42 @@
 /* Grid Layout */
 .footer-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1.5fr;
-  gap: 3rem;
+  grid-template-columns: 2fr 1fr 1.5fr 1.2fr;
+  gap: 2.5rem;
   margin-bottom: 2.5rem;
+}
+
+/* Tools column */
+.footer-tools-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-tools-col h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  color: var(--color-text);
+}
+
+.footer-tools-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem 0.75rem;
+}
+
+.footer-tool-link {
+  font-size: 0.82rem;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.footer-tool-link:hover {
+  color: var(--color-primary);
 }
 
 /* Brand Section */
@@ -252,9 +285,8 @@
 @media (max-width: 1024px) {
   .footer-grid {
     grid-template-columns: 1fr 1fr;
-    gap: 2.5rem;
+    gap: 2rem;
   }
-
   .footer-brand {
     grid-column: 1 / -1;
   }
@@ -264,43 +296,38 @@
   .footer {
     padding: 2.5rem 1.5rem 1.5rem;
   }
-
   .footer-grid {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.75rem;
   }
-
   .footer-brand {
     text-align: center;
     align-items: center;
   }
-
   .footer-links,
-  .footer-features,
+  .footer-tools-col,
   .footer-connect {
     text-align: center;
     align-items: center;
   }
-
+  .footer-tools-grid {
+    justify-items: center;
+  }
   .footer-social {
     justify-content: center;
   }
-
   .footer-portfolio-link {
     margin: 0 auto;
   }
-
   .footer-bottom {
     flex-direction: column;
     text-align: center;
     gap: 0.5rem;
   }
-
   .footer-copyright {
     justify-content: center;
     flex-wrap: wrap;
   }
-
   .footer-meta {
     justify-content: center;
     flex-wrap: wrap;

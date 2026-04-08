@@ -133,12 +133,22 @@
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 12px;
-  padding: 1.25rem;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
   transition: all 0.2s ease;
   box-shadow: var(--shadow-small);
+  overflow: hidden;
+}
+
+.feature-card-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1.25rem;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
 }
 
 .feature-card:hover {
@@ -147,23 +157,42 @@
   transform: translateY(-4px);
 }
 
-.feature-icon {
-  font-size: 1.6rem;
-  margin-bottom: 0.25rem;
+.feature-icon-wrap {
+  font-size: 1.8rem;
+  margin-bottom: 0.2rem;
+  line-height: 1;
+}
+
+.feature-emoji {
+  font-size: 1.8rem;
 }
 
 .feature-card h3 {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 700;
   color: var(--color-text);
   margin: 0;
 }
 
 .feature-card p {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--color-text-secondary);
   line-height: 1.5;
   margin: 0;
+  flex: 1;
+}
+
+.feature-try {
+  font-size: 0.75rem;
+  color: var(--color-primary);
+  font-weight: 600;
+  margin-top: 0.4rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.feature-card:hover .feature-try {
+  opacity: 1;
 }
 
 /* Tech Stack */

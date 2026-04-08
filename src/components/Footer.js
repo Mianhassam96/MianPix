@@ -4,27 +4,29 @@ import { FaFacebookF, FaGithub, FaInstagram, FaLinkedin, FaHeart, FaRocket, FaEx
 import { useTheme } from '../context/ThemeContext';
 import './Footer.css';
 
+const TOOLS = [
+  { label: 'Remove Background', path: '/tools/remove-bg'  },
+  { label: 'Smart Resize',      path: '/tools/resize'     },
+  { label: 'Background Blur',   path: '/tools/bg-blur'    },
+  { label: 'Thumbnail Maker',   path: '/tools/thumbnail'  },
+  { label: 'Image Compressor',  path: '/tools/compress'   },
+  { label: 'Format Converter',  path: '/tools/convert'    },
+  { label: 'Web Optimizer',     path: '/tools/optimizer'  },
+  { label: 'Profile Picture',   path: '/tools/profile'    },
+  { label: 'Color Palette',     path: '/tools/palette'    },
+  { label: 'Favicon Generator', path: '/tools/favicon'    },
+];
+
+const SOCIAL = [
+  { icon: <FaGithub />,    url: 'https://github.com/Mianhassam96',                  label: 'GitHub'    },
+  { icon: <FaLinkedin />,  url: 'https://www.linkedin.com/in/mianhassam96/',         label: 'LinkedIn'  },
+  { icon: <FaFacebookF />, url: 'https://www.facebook.com/mian.hassam.kz',           label: 'Facebook'  },
+  { icon: <FaInstagram />, url: 'https://www.instagram.com/mianhassam96/',           label: 'Instagram' },
+];
+
 export default function Footer() {
   const { theme } = useTheme();
-  const currentYear = new Date().getFullYear();
-
-  const socialLinks = [
-    { icon: <FaGithub />,    url: 'https://github.com/Mianhassam96',                    label: 'GitHub' },
-    { icon: <FaLinkedin />,  url: 'https://www.linkedin.com/in/mianhassam96/',           label: 'LinkedIn' },
-    { icon: <FaFacebookF />, url: 'https://www.facebook.com/mian.hassam.kz',             label: 'Facebook' },
-    { icon: <FaInstagram />, url: 'https://www.instagram.com/mianhassam96/',             label: 'Instagram' },
-  ];
-
-  const tools = [
-    'Image Editor',
-    'Avatar Creator',
-    'Remove Background',
-    'Smart Optimizer',
-    'Thumbnail Generator',
-    'Color Palette',
-    'Favicon Generator',
-    'Live Preview',
-  ];
+  const year = new Date().getFullYear();
 
   return (
     <footer className={`footer ${theme}`}>
@@ -38,16 +40,11 @@ export default function Footer() {
               MianPix
             </h3>
             <p className="footer-tagline">
-              Image tools for developers & creators. 8 powerful tools, all in your browser.
-              Free, fast, and completely private.
+              10 powerful image tools for developers & creators.
+              All in your browser — free, fast, and completely private.
             </p>
-            <a
-              href="https://multimian.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="footer-portfolio-link"
-              title="Visit MultiMian.com"
-            >
+            <a href="https://multimian.com/" target="_blank" rel="noopener noreferrer"
+              className="footer-portfolio-link" title="Visit MultiMian.com">
               <FaExternalLinkAlt /> Visit MultiMian.com
             </a>
           </div>
@@ -57,64 +54,54 @@ export default function Footer() {
             <h4>Quick Links</h4>
             <ul>
               <li><Link to="/">Home</Link></li>
-              <li><Link to="/tool">All Tools</Link></li>
               <li><Link to="/about">About</Link></li>
               <li><Link to="/contact">Contact</Link></li>
+              <li>
+                <a href="https://github.com/Mianhassam96/MianPix" target="_blank" rel="noopener noreferrer">
+                  GitHub
+                </a>
+              </li>
             </ul>
           </div>
 
-          {/* Tools */}
-          <div className="footer-features">
+          {/* Tools — split into two columns */}
+          <div className="footer-tools-col">
             <h4>Tools</h4>
-            <ul>
-              {tools.map((t, i) => <li key={i}>{t}</li>)}
-            </ul>
+            <div className="footer-tools-grid">
+              {TOOLS.map((t, i) => (
+                <Link key={i} to={t.path} className="footer-tool-link">{t.label}</Link>
+              ))}
+            </div>
           </div>
 
           {/* Connect */}
           <div className="footer-connect">
             <h4>Connect</h4>
             <div className="footer-social">
-              {socialLinks.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.label}
-                  title={social.label}
-                  className="social-link"
-                >
-                  {social.icon}
+              {SOCIAL.map((s, i) => (
+                <a key={i} href={s.url} target="_blank" rel="noopener noreferrer"
+                  aria-label={s.label} title={s.label} className="social-link">
+                  {s.icon}
                 </a>
               ))}
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
+        {/* Bottom */}
         <div className="footer-bottom">
           <p className="footer-copyright">
-            © {currentYear} MianPix. Made with <FaHeart className="heart-icon" /> by{' '}
-            <a
-              href="https://multimian.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="footer-author"
-            >
+            © {year} MianPix. Made with <FaHeart className="heart-icon" /> by{' '}
+            <a href="https://multimian.com/" target="_blank" rel="noopener noreferrer" className="footer-author">
               Mian Hassam
             </a>
           </p>
           <div className="footer-meta">
             <span>Open Source</span>
             <span className="separator">•</span>
-            <a href="https://github.com/Mianhassam96/MianPix" target="_blank" rel="noopener noreferrer">
-              GitHub
-            </a>
+            <a href="https://github.com/Mianhassam96/MianPix" target="_blank" rel="noopener noreferrer">GitHub</a>
             <span className="separator">•</span>
-            <a href="https://multimian.com/" target="_blank" rel="noopener noreferrer">
-              MultiMian.com
-            </a>
+            <a href="https://multimian.com/" target="_blank" rel="noopener noreferrer">MultiMian.com</a>
           </div>
         </div>
       </div>

@@ -46,7 +46,7 @@ const Navbar = () => {
           {/* Tools dropdown */}
           <li className="nav-dropdown" ref={dropRef}>
             <button
-              className={`nav-dropdown-trigger ${open ? 'open' : ''}`}
+              className={`nav-dropdown-trigger ${open || location.pathname.startsWith('/tools') ? 'open' : ''}`}
               onClick={() => setOpen(o => !o)}
               aria-expanded={open}
             >
@@ -54,9 +54,14 @@ const Navbar = () => {
             </button>
             {open && (
               <div className="nav-dropdown-menu">
+                <div className="nav-dropdown-header">All Tools</div>
                 <div className="nav-dropdown-grid">
                   {TOOLS.map(t => (
-                    <Link key={t.path} to={t.path} className="nav-tool-item">
+                    <Link
+                      key={t.path}
+                      to={t.path}
+                      className={`nav-tool-item ${location.pathname === t.path ? 'active' : ''}`}
+                    >
                       <span className="nav-tool-icon">{t.icon}</span>
                       <span>{t.label}</span>
                     </Link>

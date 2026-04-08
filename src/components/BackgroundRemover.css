@@ -146,3 +146,37 @@
   color: var(--color-text-secondary);
   margin-top: 0.5rem;
 }
+
+/* Error message */
+.bg-error {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: rgba(239,68,68,0.08);
+  border: 1px solid var(--color-danger);
+  border-radius: 10px;
+  color: var(--color-danger);
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.bg-error button {
+  background: none;
+  border: 1px solid var(--color-danger);
+  color: var(--color-danger);
+  border-radius: 6px;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.bg-error button:hover {
+  background: var(--color-danger);
+  color: white;
+}
