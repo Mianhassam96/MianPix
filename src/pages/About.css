@@ -1,174 +1,206 @@
-.about {
-  padding: 3rem 1rem;
-  max-width: 1000px;
+.about-page {
+  min-height: 100vh;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.about-container {
+  max-width: 900px;
   margin: 0 auto;
-  color: #111;
-}
-
-.about-container h1 {
-  font-size: 2.5rem;
-  color: #007bff;
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-
-.about-container p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  text-align: center;
-  margin-bottom: 3rem;
-  color: #555;
-}
-
-/* Dark mode */
-body.dark .about,
-body.dark .about-container p,
-body.dark .features-list li,
-body.dark .tech-item span {
-  color: #eee;
-}
-
-
-.about-container p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  text-align: center;
-  margin-bottom: 3rem;
-  color: #717580;
-}
-
-/* Tech Stack Section */
-.tech-stack {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.tech-stack h2 {
-  font-size: 1.8rem;
-  margin-bottom: 2rem;
-  color: #007bff;
-}
-
-.tech-icons {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 2rem;
-}
-
-.tech-item {
+  padding: 4rem 2rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  gap: 3rem;
 }
 
-.tech-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.tech-item span {
-  margin-top: 0.5rem;
-  font-size: 1rem;
-  font-weight: 500;
-  color: #555;
-}
-
-/* Features List */
-.features-list h2 {
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
+/* Hero */
+.about-hero {
   text-align: center;
-  color: #007bff;
 }
 
-.features-list ul {
-  list-style: disc;
-  padding-left: 1.5rem;
-  max-width: 700px;
+.about-hero h1 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
+.about-tagline {
+  font-size: 1.15rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  max-width: 600px;
   margin: 0 auto;
-  color: #555;
 }
 
-.features-list li {
-  margin-bottom: 0.8rem;
-  line-height: 1.6;
+/* Sections */
+.about-mission,
+.privacy-section,
+.github-section {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: var(--shadow-small);
 }
 
-/* Responsive - Tablets */
-@media (max-width: 900px) {
-  .about-container h1 {
-    font-size: 2.2rem;
-  }
-
-  .features-list ul {
-    padding-left: 1.2rem;
-  }
+.about-mission h2,
+.features-section h2,
+.tech-section h2,
+.privacy-section h2,
+.github-section h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
 }
 
-/* Responsive - Mobile */
+.about-mission p,
+.privacy-section p,
+.github-section p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* Features Grid */
+.features-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.feature-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-small);
+}
+
+.feature-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-medium);
+}
+
+.feature-icon {
+  font-size: 1.8rem;
+  color: var(--color-primary);
+}
+
+.feature-card h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.feature-card p {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Tech Stack */
+.tech-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tech-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.tech-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 50px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text);
+  box-shadow: var(--shadow-small);
+  transition: all 0.2s ease;
+}
+
+.tech-badge:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.tech-icon {
+  color: var(--color-primary);
+  font-size: 1rem;
+}
+
+/* GitHub link */
+.github-section {
+  text-align: center;
+}
+
+.github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-primary);
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.github-link:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-  .about-container h1 {
+  .about-container {
+    padding: 2rem 1.25rem;
+    gap: 2rem;
+  }
+
+  .about-hero h1 {
     font-size: 2rem;
   }
 
-  .about-container p {
-    font-size: 1rem;
-    margin-bottom: 2.5rem;
-  }
-
-  .tech-icons {
-    gap: 1.5rem;
-  }
-
-  .tech-item span {
-    font-size: 0.95rem;
-  }
-
-  .features-list h2 {
-    font-size: 1.6rem;
-  }
-
-  .features-list ul {
-    padding-left: 1rem;
-  }
-
-  .features-list li {
-    font-size: 0.95rem;
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Responsive - Small Mobile */
 @media (max-width: 480px) {
-  .about-container h1 {
-    font-size: 1.7rem;
+  .about-hero h1 {
+    font-size: 1.75rem;
   }
 
-  .about-container p {
-    font-size: 0.95rem;
+  .features-grid {
+    grid-template-columns: 1fr;
   }
-
-  .tech-icons {
-    gap: 1rem;
-  }
-
-  .features-list h2 {
-    font-size: 1.5rem;
-  }
-
-  .features-list li {
-    font-size: 0.9rem;
-  }
-}
-
-/* Dark Mode Support */
-body.dark .about {
-  color: #ccc;
-}
-
-body.dark .about-container p,
-body.dark .features-list li,
-body.dark .tech-item span {
-  color: #aaa;
 }

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { FaGithub, FaFacebook, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import { motion } from 'framer-motion';
+import { pageVariants } from '../animations/pageVariants';
+import { useTheme } from '../context/ThemeContext';
 import './Contact.css';
 
 const Contact = () => {
@@ -23,8 +26,16 @@ const Contact = () => {
     setFormData({ name: '', email: '', message: '' });
   };
 
+  const { theme } = useTheme();
+
   return (
-    <div className="contact">
+    <motion.div
+      className={`contact ${theme}`}
+      variants={pageVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
       <div className="contact-container">
         <h1>Contact Us</h1>
         <p>Have questions, suggestions, or feedback? We'd love to hear from you!</p>
@@ -87,7 +98,7 @@ const Contact = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

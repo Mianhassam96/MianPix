@@ -1,8 +1,8 @@
-// src/components/Layout.jsx
 import React from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { useTheme } from '../context/ThemeContext';
+import './Layout.css';
 
 export default function Layout({ children }) {
   const { theme } = useTheme();

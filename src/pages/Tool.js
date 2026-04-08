@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaEdit, FaUserCircle, FaEraser } from 'react-icons/fa';
 import { pageVariants } from '../animations/pageVariants';
+import { useTheme } from '../context/ThemeContext';
 import ImageUpload from '../components/ImageUpload';
 import ImageEditor from '../components/ImageEditor';
 import AvatarCreator from '../components/AvatarCreator';
@@ -29,6 +30,8 @@ const Tool = () => {
     setProcessedImage(processedSrc);
   };
 
+  const { theme } = useTheme();
+
   const tabs = [
     { id: 'editor', label: 'Image Editor', icon: <FaEdit /> },
     { id: 'avatar', label: 'Avatar Creator', icon: <FaUserCircle /> },
@@ -37,7 +40,7 @@ const Tool = () => {
 
   return (
     <motion.div
-      className="tool-page"
+      className={`tool-page ${theme}`}
       variants={pageVariants}
       initial="initial"
       animate="animate"

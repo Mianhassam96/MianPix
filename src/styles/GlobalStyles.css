@@ -1,17 +1,16 @@
 :root {
-  --color-primary: #4f46e5;       /* Indigo */
-  --color-primary-hover: #6366f1; /* Lighter Indigo */
-  --color-success: #10b981;       /* Emerald */
-  --color-danger: #ef4444;        /* Red */
-  --color-warning: #facc15;       /* Amber */
-  --color-info: #3b82f6;          /* Blue */
-  --color-background: #f9fafb;    /* Very light gray */
-  --color-surface: #ffffff;       /* Card background */
-  --color-text: #111827;          /* Dark gray */
-  --color-text-secondary: #6b7280;/* Medium gray */
-  --color-border: #e5e7eb;        /* Light border */
+  --color-primary: #4f46e5;
+  --color-primary-hover: #6366f1;
+  --color-success: #10b981;
+  --color-danger: #ef4444;
+  --color-warning: #facc15;
+  --color-info: #3b82f6;
+  --color-background: #f9fafb;
+  --color-surface: #ffffff;
+  --color-text: #111827;
+  --color-text-secondary: #6b7280;
+  --color-border: #e5e7eb;
 
-  /* Additional variables */
   --primary-color: #4f46e5;
   --primary-hover: #6366f1;
   --bg-primary: #f9fafb;
@@ -21,25 +20,28 @@
   --border-color: #e5e7eb;
 
   --radius-small: 8px;
+  --radius-medium: 12px;
+  --radius-large: 24px;
+  --shadow-small: 0 2px 6px rgba(0,0,0,0.08);
   --shadow-medium: 0 6px 15px rgba(0,0,0,0.1);
+  --shadow-large: 0 10px 40px rgba(0,0,0,0.12);
   --transition-normal: 0.3s ease;
   --transition-fast: 0.2s ease;
 }
 
 .dark {
-  --color-primary: #8b5cf6;       /* Violet */
-  --color-primary-hover: #a78bfa; /* Lighter violet */
-  --color-success: #22c55e;       /* Green */
-  --color-danger: #f87171;        /* Red */
-  --color-warning: #fbbf24;       /* Amber */
-  --color-info: #3b82f6;          /* Blue */
-  --color-background: #111827;    /* Dark blue/gray */
-  --color-surface: #1f2937;       /* Card surface dark */
-  --color-text: #f9fafb;          /* Light text */
-  --color-text-secondary: #d1d5db;/* Secondary text */
-  --color-border: #374151;        /* Border dark */
+  --color-primary: #8b5cf6;
+  --color-primary-hover: #a78bfa;
+  --color-success: #22c55e;
+  --color-danger: #f87171;
+  --color-warning: #fbbf24;
+  --color-info: #0ea5e9;
+  --color-background: #111827;
+  --color-surface: #1f2937;
+  --color-text: #f9fafb;
+  --color-text-secondary: #d1d5db;
+  --color-border: #374151;
 
-  /* Additional variables */
   --primary-color: #8b5cf6;
   --primary-hover: #a78bfa;
   --bg-primary: #111827;
@@ -65,20 +67,6 @@ body {
   transition: background-color var(--transition-normal), color var(--transition-normal);
 }
 
-/* Glass Effect Utility */
-.glass {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-/* Smooth Transitions */
-.transition {
-  transition: all var(--transition-normal);
-}
-
-/* Button Styles */
 .btn {
   padding: 0.75rem 1.5rem;
   border: none;
@@ -100,66 +88,17 @@ body {
   box-shadow: var(--shadow-medium);
 }
 
-/* Scroll Bar Styling */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--color-surface); }
+::-webkit-scrollbar-thumb { background: var(--color-primary); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-primary-hover); }
 
-::-webkit-scrollbar-track {
-  background: var(--color-surface);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--color-primary);
-  border-radius: var(--radius-small);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary-hover);
-}
-
-/* Loading Animation */
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
-.loading {
-  animation: spin 1s linear infinite;
-}
-
-/* Fade In Animation */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.fade-in {
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-/* Universal Dark Mode Overrides */
-body.dark input,
-body.dark select,
-body.dark textarea {
-  background-color: #2b2b2b;
-  color: #eee;
-  border-color: rgba(255,255,255,0.2);
-}
-
-body.dark input:focus,
-body.dark select:focus,
-body.dark textarea:focus {
-  border-color: var(--color-primary);
-}
-
-body.dark button {
-  border-color: rgba(255,255,255,0.1);
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
