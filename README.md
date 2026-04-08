@@ -1,88 +1,204 @@
-MianPix — Professional Online Image Editor
 
-MianPix is a modern, fast, and powerful image editing web app designed for creators and developers. Upload, preview, and enhance images instantly with smooth controls, smart tools, and beautiful UI. Crop, resize, apply filters, add text, optimize for web, and download in seconds — all directly in your browser.
+# 🖼️ MianPix — Smart Image Tools for Creators & Developers
 
+**MianPix** is a modern, fast, and user-friendly image editing web app built as a collection of smart tools. Upload your image, choose any tool, and enhance, optimize, or transform your image instantly — all directly in your browser.
 
-🌟 Features
+Designed with a clean UI and one-click workflows, MianPix makes image editing simple, fast, and professional.
 
-✨ Core Editing Tools
-- Upload images from your device or via URL
-- Crop and resize images easily
-- Compress images for faster sharing
-- Rotate and flip images
-- Multiple export formats (PNG, JPG, WEBP)
+---
 
-🎨 Avatar Creator
-- Create perfect profile pictures
-- Circle or square avatar shapes
-- Custom background colors
-- Gradient backgrounds
-- Adjustable borders
-- Custom sizing (200px - 800px)
+# ✨ Features
 
-🔮 Background Remover
-- One-click AI-powered background removal
-- Transparent PNG output
-- Fast processing
-- No server uploads - all client-side
+## 🧩 Smart Image Tools
 
-🎯 User Experience
-- Dark / Light mode toggle
-- Social media links integrated
-- Fully responsive for mobile and desktop
-- Real-time preview
-- Smooth animations with Framer Motion
+MianPix provides a set of powerful and easy-to-use tools:
 
+### 1. Remove Background
 
-⚡ Installation & Setup
+* One-click background removal
+* Transparent PNG output
+* Clean subject detection
+* Fast processing
+
+### 2. Smart Resize
+
+* Resize for social media
+* YouTube thumbnail size
+* Blog image size
+* Custom dimensions
+* Auto center image
+
+### 3. Background Blur
+
+* Portrait-style blur
+* Adjustable blur intensity
+* Focus subject
+* Smooth output
+
+### 4. Thumbnail Maker
+
+* YouTube thumbnails
+* Blog featured images
+* Social media banners
+* Auto crop & spacing
+
+### 5. Image Compressor
+
+* Reduce file size
+* Quality control
+* Fast optimization
+* Download compressed image
+
+### 6. Format Converter
+
+Convert images instantly:
+
+* PNG → JPG
+* JPG → PNG
+* WEBP → PNG
+* PNG → WEBP
+
+### 7. Web Optimizer
+
+* Convert to WebP
+* Compress large images
+* Optimize for websites
+* Improve loading speed
+
+### 8. Profile Picture Maker
+
+* Circle crop
+* Center subject
+* Blur background
+* Add shadow effect
+
+### 9. Color Palette Extractor
+
+* Extract colors from image
+* Generate palette
+* Copy HEX codes
+* Gradient inspiration
+
+### 10. Favicon Generator
+
+Generate website icons:
+
+* favicon.ico
+* 16x16
+* 32x32
+* 180x180
+* App icons
+
+---
+
+# 🎯 User Experience
+
+* Clean tool-based interface
+* Open any tool instantly
+* Drag & drop upload
+* Real-time preview
+* Fast processing
+* Responsive design
+* Dark / Light mode
+* Smooth animations
+* Mobile friendly
+
+---
+
+# ⚡ Installation & Setup
 
 Clone the repository:
 
+```bash
 git clone https://github.com/Mianhassam96/MianPix.git
 cd MianPix
 npm install
 npm start
+```
 
+Open in browser:
 
-Open in browser: http://localhost:3000
-🌐 Deployment
+```
+http://localhost:3000
+```
 
-Deployed on GitHub Pages:
+---
 
+# 🌐 Deployment
+
+Deploy using GitHub Pages:
+
+```bash
 npm run build
 npm run deploy
+```
+
+---
+
+# 🚀 Live Demo
+
+[https://mianhassam96.github.io/MianPix/](https://mianhassam96.github.io/MianPix/)
+
+---
+
+# 🧠 Tech Stack
+
+* React
+* Tailwind CSS
+* Framer Motion
+* Canvas API
+* Client-side image processing
+
+---
+
+# 🤝 Contribution
+
+Contributions are welcome!
+
+1. Fork the repository
+2. Create your feature branch
+
+```bash
+git checkout -b feature/NewFeature
+```
+
+3. Commit your changes
+
+```bash
+git commit -m "Add new feature"
+```
+
+4. Push to branch
+
+```bash
+git push origin feature/NewFeature
+```
+
+5. Open Pull Request
+
+---
+
+# 👤 Author
+
+**Mian Hassam**
+
+GitHub
+[https://github.com/Mianhassam96](https://github.com/Mianhassam96)
+
+LinkedIn
+[https://www.linkedin.com/in/mianhassam96/](https://www.linkedin.com/in/mianhassam96/)
+
+Facebook
+[https://www.facebook.com/mian.hassam.kz](https://www.facebook.com/mian.hassam.kz)
+
+Instagram
+[https://www.instagram.com/mianhassam96/](https://www.instagram.com/mianhassam96/)
+
+---
+
+# 📝 License
+
+This project is licensed under the **MIT License**
 
 
-🌐 Live Demo: https://mianhassam96.github.io/MianPix/
 
-
-🤝 Contribution
-
-Contributions are welcome and encouraged:
-
-Fork the repository
-
-Create your feature branch (git checkout -b feature/YourFeature)
-
-Commit your changes (git commit -m "Add YourFeature")
-
-Push to the branch (git push origin feature/YourFeature)
-
-Open a Pull Request
-
-👤 Author
-
-Mian Hassam
-
-GitHub: https://github.com/Mianhassam96
-
-LinkedIn: https://www.linkedin.com/in/mianhassam96/
-
-Facebook: https://www.facebook.com/mian.hassam.kz
-
-Instagram: https://www.instagram.com/mianhassam96/
-
-📝 License
-
-This project is licensed under the MIT License — see the LICENSE
- file for details.
