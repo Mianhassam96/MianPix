@@ -1,0 +1,238 @@
+.smart-optimizer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-small);
+}
+
+.optimizer-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.optimizer-header h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.optimizer-header h3 svg { color: var(--color-warning); }
+
+.optimizer-header p {
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+}
+
+.optimizer-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.opt-control {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.opt-control label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.opt-control input[type="range"] {
+  accent-color: var(--color-primary);
+  width: 100%;
+}
+
+.format-btns {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.format-btns button {
+  flex: 1;
+  padding: 0.55rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-background);
+  color: var(--color-text);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.format-btns button:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.format-btns button.active {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+.optimize-btn {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, var(--color-warning), #f97316);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 1.5rem;
+}
+
+.optimize-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+  filter: brightness(1.1);
+}
+
+.optimize-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Result */
+.optimizer-result {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.result-stats {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.stat-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.75rem 1.25rem;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  min-width: 90px;
+}
+
+.stat-box.optimized {
+  border-color: var(--color-success);
+}
+
+.stat-box.saving {
+  background: var(--color-success);
+  border-color: var(--color-success);
+  color: white;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.stat-box.saving .stat-label { color: rgba(255,255,255,0.85); }
+
+.stat-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.stat-box.saving .stat-value { color: white; font-size: 1.3rem; }
+
+.stat-arrow {
+  font-size: 1.5rem;
+  color: var(--color-text-secondary);
+}
+
+.result-meta {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  font-family: monospace;
+}
+
+/* Bar chart */
+.before-after-sizes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.ba-bar {
+  height: 28px;
+  background: var(--color-background);
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.ba-fill {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: white;
+  border-radius: 6px;
+  transition: width 0.6s ease;
+}
+
+.ba-fill.original {
+  background: var(--color-text-secondary);
+}
+
+.ba-fill.optimized {
+  background: var(--color-success);
+}
+
+.opt-download-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.9rem;
+  background: var(--color-success);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.opt-download-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+}
+
+@media (max-width: 600px) {
+  .smart-optimizer { padding: 1.25rem; }
+  .result-stats { gap: 0.5rem; }
+  .stat-box { min-width: 70px; padding: 0.6rem 0.75rem; }
+}

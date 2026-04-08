@@ -1,15 +1,9 @@
 import { Link } from 'react-router-dom';
-import { 
-  FaImage, 
-  FaCompress, 
-  FaCrop, 
-  FaDownload, 
-  FaUserCircle, 
-  FaEraser,
-  FaLock,
-  FaBolt,
-  FaHeart,
-  FaArrowRight
+import {
+  FaImage, FaCompress, FaCrop, FaDownload,
+  FaUserCircle, FaEraser, FaLock, FaBolt,
+  FaHeart, FaArrowRight, FaEyeDropper, FaCode,
+  FaGlobe, FaPalette
 } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { pageVariants } from '../animations/pageVariants';
@@ -20,42 +14,16 @@ const Home = () => {
   const { theme } = useTheme();
 
   const features = [
-    { 
-      icon: <FaCrop />, 
-      title: 'Crop & Resize', 
-      desc: 'Precisely crop and resize images to any dimension with ease',
-      color: '#3b82f6'
-    },
-    { 
-      icon: <FaCompress />, 
-      title: 'Compress', 
-      desc: 'Reduce file size while maintaining excellent quality',
-      color: '#10b981'
-    },
-    { 
-      icon: <FaUserCircle />, 
-      title: 'Avatar Creator', 
-      desc: 'Create stunning profile pictures with custom backgrounds',
-      color: '#8b5cf6'
-    },
-    { 
-      icon: <FaEraser />, 
-      title: 'Remove Background', 
-      desc: 'AI-powered one-click background removal',
-      color: '#ef4444'
-    },
-    { 
-      icon: <FaImage />, 
-      title: 'Multiple Formats', 
-      desc: 'Export to PNG, JPG, or WEBP formats instantly',
-      color: '#f59e0b'
-    },
-    { 
-      icon: <FaDownload />, 
-      title: 'Quick Download', 
-      desc: 'Download your edited images with a single click',
-      color: '#06b6d4'
-    }
+    { icon: <FaCrop />,        title: 'Crop & Resize',         desc: 'Precisely crop and resize to any dimension', color: '#3b82f6' },
+    { icon: <FaCompress />,    title: 'Smart Optimizer',       desc: 'Compress + convert to WebP with size savings', color: '#10b981' },
+    { icon: <FaUserCircle />,  title: 'Avatar Creator',        desc: 'Create profile pictures with custom backgrounds', color: '#8b5cf6' },
+    { icon: <FaEraser />,      title: 'Remove Background',     desc: 'AI-powered one-click background removal', color: '#ef4444' },
+    { icon: <FaImage />,       title: 'Thumbnail Generator',   desc: 'YouTube, blog, social thumbnails in one click', color: '#f59e0b' },
+    { icon: <FaEyeDropper />,  title: 'Color Palette',         desc: 'Extract colors & gradients from any image', color: '#06b6d4' },
+    { icon: <FaCode />,        title: 'Favicon Generator',     desc: 'All favicon sizes + HTML snippet for devs', color: '#ec4899' },
+    { icon: <FaGlobe />,       title: 'Live Website Preview',  desc: 'See your image in blog, hero & OG card mockups', color: '#14b8a6' },
+    { icon: <FaPalette />,     title: 'Multiple Formats',      desc: 'Export PNG, JPG, WEBP instantly', color: '#a855f7' },
+    { icon: <FaDownload />,    title: 'Quick Download',        desc: 'Download or share with a single click', color: '#64748b' },
   ];
 
   const benefits = [
@@ -93,28 +61,28 @@ const Home = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <motion.div 
+            <motion.div
               className="hero-badge"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
             >
-              <FaBolt /> New: AI Background Removal
+              <FaBolt /> Image Tools for Developers & Creators
             </motion.div>
-            
+
             <h1 className="hero-title">
-              Professional Image Editing
-              <span className="gradient-text"> Made Simple</span>
+              MianPix — More Than
+              <span className="gradient-text"> an Image Editor</span>
             </h1>
-            
+
             <p className="hero-subtitle">
-              Edit, resize, crop, compress, create avatars, and remove backgrounds — 
-              all in your browser. Fast, free, and privacy-focused.
+              Thumbnail generator, favicon creator, color palette extractor, live website preview,
+              smart optimizer & more — all in your browser. Free, fast, private.
             </p>
-            
+
             <div className="hero-buttons">
               <Link to="/tool" className="btn btn-primary">
-                Start Editing <FaArrowRight />
+                Open Tools <FaArrowRight />
               </Link>
               <Link to="/about" className="btn btn-secondary">
                 Learn More
@@ -123,16 +91,16 @@ const Home = () => {
 
             <div className="hero-stats">
               <div className="stat">
+                <span className="stat-number">8</span>
+                <span className="stat-label">Tools</span>
+              </div>
+              <div className="stat">
                 <span className="stat-number">100%</span>
                 <span className="stat-label">Free</span>
               </div>
               <div className="stat">
                 <span className="stat-number">0</span>
                 <span className="stat-label">Uploads</span>
-              </div>
-              <div className="stat">
-                <span className="stat-number">∞</span>
-                <span className="stat-label">Privacy</span>
               </div>
             </div>
           </motion.div>
@@ -144,14 +112,13 @@ const Home = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <div className="visual-card">
-              <div className="visual-icon">
-                <FaImage />
-              </div>
+              <div className="visual-icon"><FaImage /></div>
               <div className="visual-features">
-                <div className="visual-feature">✓ Crop & Resize</div>
-                <div className="visual-feature">✓ Avatar Creator</div>
-                <div className="visual-feature">✓ Remove Background</div>
-                <div className="visual-feature">✓ Compress</div>
+                <div className="visual-feature">✓ Thumbnail Generator</div>
+                <div className="visual-feature">✓ Favicon Creator</div>
+                <div className="visual-feature">✓ Color Palette</div>
+                <div className="visual-feature">✓ Live Preview</div>
+                <div className="visual-feature">✓ Smart Optimizer</div>
               </div>
             </div>
           </motion.div>
@@ -168,9 +135,9 @@ const Home = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="section-title">Powerful Features</h2>
+            <h2 className="section-title">10 Powerful Tools</h2>
             <p className="section-subtitle">
-              Everything you need to edit images professionally
+              Everything developers & creators need — in one place
             </p>
           </motion.div>
 
@@ -182,8 +149,8 @@ const Home = () => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                transition={{ duration: 0.5, delay: index * 0.07 }}
+                whileHover={{ y: -6, transition: { duration: 0.2 } }}
               >
                 <div className="feature-icon" style={{ color: feature.color }}>
                   {feature.icon}
@@ -207,9 +174,7 @@ const Home = () => {
             transition={{ duration: 0.5 }}
           >
             <h2 className="section-title">Why Choose MianPix?</h2>
-            <p className="section-subtitle">
-              Built with your privacy and convenience in mind
-            </p>
+            <p className="section-subtitle">Built with your privacy and convenience in mind</p>
           </motion.div>
 
           <div className="benefits-grid">
@@ -240,12 +205,12 @@ const Home = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="cta-title">Ready to Edit Your Images?</h2>
+          <h2 className="cta-title">Ready to Use All 8 Tools?</h2>
           <p className="cta-subtitle">
-            Start editing now. No sign-up required. Completely free.
+            No sign-up. No uploads. Completely free. Built for developers & creators.
           </p>
           <Link to="/tool" className="btn btn-cta">
-            Get Started Now <FaArrowRight />
+            Open MianPix Tools <FaArrowRight />
           </Link>
         </motion.div>
       </section>

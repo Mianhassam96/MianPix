@@ -1,0 +1,216 @@
+.favicon-generator {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-small);
+}
+
+.favicon-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.favicon-header h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.favicon-header h3 svg { color: var(--color-primary); }
+
+.favicon-header p {
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+}
+
+.generate-btn {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 1.5rem;
+}
+
+.generate-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+  filter: brightness(1.1);
+}
+
+.generate-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.favicon-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.favicon-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.favicon-item:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-small);
+}
+
+.favicon-preview-wrap {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface);
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.favicon-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.favicon-size {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.favicon-desc {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+}
+
+.favicon-label {
+  font-size: 0.7rem;
+  color: var(--color-primary);
+  font-family: monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.favicon-dl-btn {
+  padding: 0.4rem;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.favicon-dl-btn:hover {
+  background: var(--color-primary-hover);
+}
+
+/* HTML snippet */
+.favicon-html {
+  margin-bottom: 1.5rem;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.favicon-html h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.favicon-html pre {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 0.75rem;
+  overflow-x: auto;
+  margin-bottom: 0.75rem;
+}
+
+.favicon-html code {
+  font-size: 0.78rem;
+  color: var(--color-primary);
+  font-family: monospace;
+  white-space: pre;
+}
+
+.favicon-html button {
+  padding: 0.5rem 1rem;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.favicon-html button:hover {
+  background: var(--color-primary-hover);
+}
+
+.download-all-btn {
+  width: 100%;
+  padding: 0.9rem;
+  background: var(--color-success);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.download-all-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+}
+
+@media (max-width: 600px) {
+  .favicon-grid { grid-template-columns: 1fr 1fr; }
+  .favicon-generator { padding: 1.25rem; }
+}

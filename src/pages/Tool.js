@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaEdit, FaUserCircle, FaEraser } from 'react-icons/fa';
+import {
+  FaEdit, FaUserCircle, FaEraser, FaEyeDropper,
+  FaCode, FaImage, FaBolt, FaGlobe
+} from 'react-icons/fa';
 import { pageVariants } from '../animations/pageVariants';
 import { useTheme } from '../context/ThemeContext';
 import ImageUpload from '../components/ImageUpload';
@@ -8,9 +11,26 @@ import ImageEditor from '../components/ImageEditor';
 import AvatarCreator from '../components/AvatarCreator';
 import BackgroundRemover from '../components/BackgroundRemover';
 import BeforeAfter from '../components/BeforeAfter';
+import ColorPalette from '../components/ColorPalette';
+import FaviconGenerator from '../components/FaviconGenerator';
+import ThumbnailGenerator from '../components/ThumbnailGenerator';
+import SmartOptimizer from '../components/SmartOptimizer';
+import LivePreview from '../components/LivePreview';
 import './Tool.css';
 
+const tabs = [
+  { id: 'editor',     label: 'Image Editor',     icon: <FaEdit /> },
+  { id: 'avatar',     label: 'Avatar Creator',    icon: <FaUserCircle /> },
+  { id: 'background', label: 'Remove BG',         icon: <FaEraser /> },
+  { id: 'optimizer',  label: 'Smart Optimizer',   icon: <FaBolt /> },
+  { id: 'thumbnail',  label: 'Thumbnail',         icon: <FaImage /> },
+  { id: 'palette',    label: 'Color Palette',     icon: <FaEyeDropper /> },
+  { id: 'favicon',    label: 'Favicon',           icon: <FaCode /> },
+  { id: 'preview',    label: 'Live Preview',      icon: <FaGlobe /> },
+];
+
 const Tool = () => {
+  const { theme } = useTheme();
   const [imageSrc, setImageSrc] = useState(null);
   const [activeTab, setActiveTab] = useState('editor');
   const [processedImage, setProcessedImage] = useState(null);
@@ -25,18 +45,6 @@ const Tool = () => {
     setActiveTab('editor');
     setProcessedImage(null);
   };
-
-  const handleImageProcessed = (processedSrc) => {
-    setProcessedImage(processedSrc);
-  };
-
-  const { theme } = useTheme();
-
-  const tabs = [
-    { id: 'editor', label: 'Image Editor', icon: <FaEdit /> },
-    { id: 'avatar', label: 'Avatar Creator', icon: <FaUserCircle /> },
-    { id: 'background', label: 'Remove Background', icon: <FaEraser /> }
-  ];
 
   return (
     <motion.div
@@ -54,9 +62,9 @@ const Tool = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h1 className="tool-title">Upload Your Image</h1>
+            <h1 className="tool-title">Image Tools for Developers & Creators</h1>
             <p className="tool-desc">
-              Choose an image from your device or paste an image URL to start editing instantly.
+              Upload your image to access 8 powerful tools — optimizer, thumbnails, favicon generator, color palette, live preview & more.
             </p>
             <ImageUpload onImageLoad={handleImageLoad} />
           </motion.div>
@@ -89,14 +97,29 @@ const Tool = () => {
               )}
               {activeTab === 'background' && (
                 <>
-                  <BackgroundRemover 
-                    image={imageSrc} 
-                    onImageProcessed={handleImageProcessed}
+                  <BackgroundRemover
+                    image={imageSrc}
+                    onImageProcessed={setProcessedImage}
                   />
                   {processedImage && (
                     <BeforeAfter beforeImage={imageSrc} afterImage={processedImage} />
                   )}
                 </>
+              )}
+              {activeTab === 'optimizer' && (
+                <SmartOptimizer imageSrc={imageSrc} />
+              )}
+              {activeTab === 'thumbnail' && (
+                <ThumbnailGenerator imageSrc={imageSrc} />
+              )}
+              {activeTab === 'palette' && (
+                <ColorPalette imageSrc={imageSrc} />
+              )}
+              {activeTab === 'favicon' && (
+                <FaviconGenerator imageSrc={imageSrc} />
+              )}
+              {activeTab === 'preview' && (
+                <LivePreview imageSrc={imageSrc} />
               )}
             </div>
 
