@@ -9,19 +9,16 @@ import LoadingScreen from './components/LoadingScreen';
 import './styles/GlobalStyles.css';
 import './App.css';
 
-// Pages
-const Home    = lazy(() => import('./pages/Home'));
-const About   = lazy(() => import('./pages/About'));
-const Contact = lazy(() => import('./pages/Contact'));
-const NotFound = lazy(() => import('./pages/NotFound'));
-
-// Tool pages
+const Home           = lazy(() => import('./pages/Home'));
+const About          = lazy(() => import('./pages/About'));
+const Contact        = lazy(() => import('./pages/Contact'));
+const NotFound       = lazy(() => import('./pages/NotFound'));
 const RemoveBg       = lazy(() => import('./tools/RemoveBg'));
 const SmartResize    = lazy(() => import('./tools/SmartResize'));
 const BgBlur         = lazy(() => import('./tools/BgBlur'));
 const ThumbnailMaker = lazy(() => import('./tools/ThumbnailMaker'));
 const Compressor     = lazy(() => import('./tools/Compressor'));
-const FormatConverter = lazy(() => import('./tools/FormatConverter'));
+const FormatConverter  = lazy(() => import('./tools/FormatConverter'));
 const WebOptimizer   = lazy(() => import('./tools/WebOptimizer'));
 const ProfilePicture = lazy(() => import('./tools/ProfilePicture'));
 const PaletteExtractor = lazy(() => import('./tools/PaletteExtractor'));
@@ -35,12 +32,9 @@ function AnimatedRoutes() {
     <>
       <AnimatePresence mode="wait" initial={false}>
         <Routes location={location} key={location.pathname}>
-          {/* Main pages */}
-          <Route path="/"        element={<Layout><Home /></Layout>} />
-          <Route path="/about"   element={<Layout><About /></Layout>} />
-          <Route path="/contact" element={<Layout><Contact /></Layout>} />
-
-          {/* Tool pages */}
+          <Route path="/"                 element={<Layout><Home /></Layout>} />
+          <Route path="/about"            element={<Layout><About /></Layout>} />
+          <Route path="/contact"          element={<Layout><Contact /></Layout>} />
           <Route path="/tools/remove-bg"  element={<Layout><RemoveBg /></Layout>} />
           <Route path="/tools/resize"     element={<Layout><SmartResize /></Layout>} />
           <Route path="/tools/bg-blur"    element={<Layout><BgBlur /></Layout>} />
@@ -51,8 +45,7 @@ function AnimatedRoutes() {
           <Route path="/tools/profile"    element={<Layout><ProfilePicture /></Layout>} />
           <Route path="/tools/palette"    element={<Layout><PaletteExtractor /></Layout>} />
           <Route path="/tools/favicon"    element={<Layout><FaviconGen /></Layout>} />
-
-          <Route path="*" element={<Layout><NotFound /></Layout>} />
+          <Route path="*"                 element={<Layout><NotFound /></Layout>} />
         </Routes>
       </AnimatePresence>
 

@@ -61,7 +61,8 @@ const ToolPage = ({ icon, title, description, children, noUpload = false }) => {
 
   // Show paste hint after 1.5s on upload screen
   useEffect(() => {
-    if (imageSrc || noUpload) return;
+    if (imageSrc || noUpload) { setPasteHint(false); return; }
+    setPasteHint(false);
     const t = setTimeout(() => setPasteHint(true), 1500);
     return () => clearTimeout(t);
   }, [imageSrc, noUpload]);
