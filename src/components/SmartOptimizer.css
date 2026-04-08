@@ -231,8 +231,15 @@
   box-shadow: var(--shadow-medium);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .smart-optimizer { padding: 1.25rem; }
   .result-stats { gap: 0.5rem; }
   .stat-box { min-width: 70px; padding: 0.6rem 0.75rem; }
+  .format-btns button { font-size: 0.8rem; padding: 0.5rem; }
+}
+
+@media (max-width: 480px) {
+  .result-stats { flex-direction: column; align-items: stretch; }
+  .stat-arrow { transform: rotate(90deg); text-align: center; }
+  .stat-box { flex-direction: row; justify-content: space-between; }
 }

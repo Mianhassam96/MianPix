@@ -192,8 +192,14 @@
   box-shadow: var(--shadow-medium);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .thumb-presets { grid-template-columns: repeat(2, 1fr); }
   .thumb-control-row { grid-template-columns: 1fr 1fr; }
   .thumbnail-generator { padding: 1.25rem; }
+}
+
+@media (max-width: 480px) {
+  .thumb-presets { grid-template-columns: 1fr 1fr; }
+  .thumb-control-row { grid-template-columns: 1fr; }
+  .preset-label { font-size: 0.72rem; }
 }

@@ -184,7 +184,7 @@
 }
 
 /* Responsive */
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
   .image-editor {
     grid-template-columns: 1fr;
   }
@@ -204,5 +204,20 @@
   .preview-panel img {
     max-height: 50vh;
     width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .image-editor {
+    padding: 0.75rem;
+  }
+
+  .control-group h3 {
+    font-size: 0.8rem;
+  }
+
+  .control-group button {
+    font-size: 0.82rem;
+    padding: 0.55rem;
   }
 }

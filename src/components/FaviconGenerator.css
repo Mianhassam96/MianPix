@@ -210,7 +210,12 @@
   box-shadow: var(--shadow-medium);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .favicon-grid { grid-template-columns: 1fr 1fr; }
   .favicon-generator { padding: 1.25rem; }
+}
+
+@media (max-width: 480px) {
+  .favicon-grid { grid-template-columns: 1fr; }
+  .favicon-item { flex-direction: row; }
 }

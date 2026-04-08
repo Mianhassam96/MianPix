@@ -153,11 +153,20 @@
   filter: brightness(1.1);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .palette-swatches {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
   .color-palette {
     padding: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .palette-swatches {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .swatch-color {
+    height: 48px;
   }
 }

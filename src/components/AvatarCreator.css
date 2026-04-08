@@ -213,7 +213,7 @@
 }
 
 /* Responsive */
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
   .avatar-creator {
     flex-direction: column;
   }
@@ -232,9 +232,17 @@
 
   .avatar-controls {
     padding: 1rem;
+    position: static;
   }
 
   .shape-buttons {
     flex-direction: row;
+  }
+}
+
+@media (max-width: 480px) {
+  .avatar-preview {
+    min-height: 200px;
+    padding: 1rem;
   }
 }
