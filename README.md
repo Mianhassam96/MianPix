@@ -1,4 +1,4 @@
-🌟MianPix — Professional Online Image Editor
+MianPix — Professional Online Image Editor
 
 MianPix is a modern, fast, and powerful image editing web app designed for creators and developers. Upload, preview, and enhance images instantly with smooth controls, smart tools, and beautiful UI. Crop, resize, apply filters, add text, optimize for web, and download in seconds — all directly in your browser.
 
