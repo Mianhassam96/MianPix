@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>MianPix</title>
+    <script>
+      // Redirect to index with the path encoded as a query param
+      var path = window.location.pathname.replace('/MianPix', '') || '/';
+      window.location.replace(
+        window.location.origin + '/MianPix/?p=' + encodeURIComponent(path)
+      );
+    </script>
+  </head>
+  <body></body>
+</html>
