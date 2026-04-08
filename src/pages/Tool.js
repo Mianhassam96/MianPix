@@ -6,23 +6,27 @@ import ImageUpload from '../components/ImageUpload';
 import ImageEditor from '../components/ImageEditor';
 import AvatarCreator from '../components/AvatarCreator';
 import BackgroundRemover from '../components/BackgroundRemover';
+import BeforeAfter from '../components/BeforeAfter';
 import './Tool.css';
 
 const Tool = () => {
   const [imageSrc, setImageSrc] = useState(null);
-  const [activeTab, setActiveTab] = useState('editor'); // editor, avatar, background
+  const [activeTab, setActiveTab] = useState('editor');
+  const [processedImage, setProcessedImage] = useState(null);
 
   const handleImageLoad = (src) => {
     setImageSrc(src);
+    setProcessedImage(null);
   };
 
   const handleReset = () => {
     setImageSrc(null);
     setActiveTab('editor');
+    setProcessedImage(null);
   };
 
   const handleImageProcessed = (processedSrc) => {
-    setImageSrc(processedSrc);
+    setProcessedImage(processedSrc);
   };
 
   const tabs = [
@@ -81,10 +85,15 @@ const Tool = () => {
                 <AvatarCreator imageSrc={imageSrc} />
               )}
               {activeTab === 'background' && (
-                <BackgroundRemover 
-                  image={imageSrc} 
-                  onImageProcessed={handleImageProcessed}
-                />
+                <>
+                  <BackgroundRemover 
+                    image={imageSrc} 
+                    onImageProcessed={handleImageProcessed}
+                  />
+                  {processedImage && (
+                    <BeforeAfter beforeImage={imageSrc} afterImage={processedImage} />
+                  )}
+                </>
               )}
             </div>
 

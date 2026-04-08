@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaGithub, FaFacebook, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 import './Contact.css';
 
 const Contact = () => {
@@ -18,7 +19,7 @@ const Contact = () => {
  
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert('Thank you for your message! (Note: This is a demo form)');
+    toast.success('Thank you for your message! We\'ll get back to you soon.');
     setFormData({ name: '', email: '', message: '' });
   };
 

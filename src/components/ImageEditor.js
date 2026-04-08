@@ -12,6 +12,9 @@ import {
   FaShare,
   FaCopy
 } from 'react-icons/fa';
+import { resizeImage, canvasToBlob } from '../utils/imageUtils';
+import { addToHistory } from '../utils/storageUtils';
+import { useKeyboardShortcuts } from '../utils/useKeyboardShortcuts';
 import './ImageEditor.css';
 
 const ImageEditor = ({ imageSrc, onReset }) => {
@@ -35,95 +38,94 @@ const ImageEditor = ({ imageSrc, onReset }) => {
     }
   }, [imageSrc]);
 
-  const handleRotate = () => setRotation((rotation + 90) % 360);
-  const handleFlipH = () => setFlipH(!flipH);
-  const handleFlipV = () => setFlipV(!flipV);
-  const toggleCrop = () => setIsCropping(!isCropping);
+  const handleRotate = () => setRotation((r) => (r + 90) % 360);
+  const handleFlipH = () => setFlipH((f) => !f);
+  const handleFlipV = () => setFlipV((f) => !f);
+  const toggleCrop = () => setIsCropping((c) => !c);
 
-  const generateCanvas = () => {
+  // Keyboard shortcuts
+  useKeyboardShortcuts({
+    'r': handleRotate,
+    'f': handleFlipH,
+    'c': toggleCrop,
+    'ctrl+d': handleDownload,
+  });
+
+  const generateCanvas = async () => {
     const image = imgRef.current;
     if (!image) return null;
 
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    let finalWidth = width || image.naturalWidth;
-    let finalHeight = height || image.naturalHeight;
+    let finalWidth = Number(width) || image.naturalWidth;
+    let finalHeight = Number(height) || image.naturalHeight;
 
-    if (rotation === 90 || rotation === 270) {
-      canvas.width = finalHeight;
-      canvas.height = finalWidth;
-    } else {
-      canvas.width = finalWidth;
-      canvas.height = finalHeight;
-    }
+    // Use Pica for high-quality resize when dimensions differ from natural
+    const needsResize =
+      finalWidth !== image.naturalWidth || finalHeight !== image.naturalHeight;
 
-    ctx.save();
-    ctx.translate(canvas.width / 2, canvas.height / 2);
-    ctx.rotate((rotation * Math.PI) / 180);
-    ctx.scale(flipH ? -1 : 1, flipV ? -1 : 1);
+    // Build a source canvas first (handles crop + transform)
+    const srcCanvas = document.createElement('canvas');
+    const ctx = srcCanvas.getContext('2d');
 
     if (completedCrop && isCropping) {
       const scaleX = image.naturalWidth / image.width;
       const scaleY = image.naturalHeight / image.height;
-      canvas.width = completedCrop.width * scaleX;
-      canvas.height = completedCrop.height * scaleY;
-
+      srcCanvas.width = completedCrop.width * scaleX;
+      srcCanvas.height = completedCrop.height * scaleY;
       ctx.drawImage(
         image,
         completedCrop.x * scaleX,
         completedCrop.y * scaleY,
         completedCrop.width * scaleX,
         completedCrop.height * scaleY,
-        -canvas.width / 2,
-        -canvas.height / 2,
-        canvas.width,
-        canvas.height
+        0, 0,
+        srcCanvas.width,
+        srcCanvas.height
       );
     } else {
-      ctx.drawImage(image, -finalWidth / 2, -finalHeight / 2, finalWidth, finalHeight);
+      const sw = rotation === 90 || rotation === 270 ? image.naturalHeight : image.naturalWidth;
+      const sh = rotation === 90 || rotation === 270 ? image.naturalWidth : image.naturalHeight;
+      srcCanvas.width = sw;
+      srcCanvas.height = sh;
+      ctx.save();
+      ctx.translate(sw / 2, sh / 2);
+      ctx.rotate((rotation * Math.PI) / 180);
+      ctx.scale(flipH ? -1 : 1, flipV ? -1 : 1);
+      ctx.drawImage(image, -image.naturalWidth / 2, -image.naturalHeight / 2);
+      ctx.restore();
     }
 
-    ctx.restore();
-    return canvas;
+    if (needsResize) {
+      return await resizeImage(srcCanvas, finalWidth, finalHeight);
+    }
+    return srcCanvas;
   };
 
-  const handleDownload = () => {
-    const canvas = generateCanvas();
+  async function handleDownload() {
+    const canvas = await generateCanvas();
     if (!canvas) return;
 
-    const mimeType = format === 'jpg' ? 'image/jpeg' : `image/${format}`;
-    canvas.toBlob(
-      (blob) => {
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.download = `mianpix-edited.${format}`;
-        link.href = url;
-        link.click();
-        URL.revokeObjectURL(url);
-        toast.success('Image downloaded successfully!');
-      },
-      mimeType,
-      quality
-    );
+    const blob = await canvasToBlob(canvas, format, quality);
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.download = `mianpix-edited.${format}`;
+    link.href = url;
+    link.click();
+    URL.revokeObjectURL(url);
+    toast.success('Image downloaded successfully!');
+    addToHistory({ action: 'download', format, width: canvas.width, height: canvas.height });
   };
 
   const handleCopyLink = async () => {
     try {
-      const canvas = generateCanvas();
+      const canvas = await generateCanvas();
       if (!canvas) return;
 
       canvas.toBlob(async (blob) => {
         try {
-          // Try to use the Clipboard API
           if (navigator.clipboard && navigator.clipboard.write) {
-            await navigator.clipboard.write([
-              new ClipboardItem({
-                [blob.type]: blob
-              })
-            ]);
+            await navigator.clipboard.write([new ClipboardItem({ [blob.type]: blob })]);
             toast.success('Image copied to clipboard!');
           } else {
-            // Fallback: create a data URL
             const dataUrl = canvas.toDataURL(`image/${format}`, quality);
             await navigator.clipboard.writeText(dataUrl);
             toast.success('Image data URL copied to clipboard!');
@@ -143,19 +145,14 @@ const ImageEditor = ({ imageSrc, onReset }) => {
 
   const handleShare = async () => {
     try {
-      const canvas = generateCanvas();
+      const canvas = await generateCanvas();
       if (!canvas) return;
 
       canvas.toBlob(async (blob) => {
         const file = new File([blob], `mianpix-edited.${format}`, { type: blob.type });
-        
         if (navigator.share && navigator.canShare({ files: [file] })) {
           try {
-            await navigator.share({
-              files: [file],
-              title: 'MianPix Edited Image',
-              text: 'Check out my edited image from MianPix!'
-            });
+            await navigator.share({ files: [file], title: 'MianPix Edited Image', text: 'Check out my edited image from MianPix!' });
             toast.success('Image shared successfully!');
           } catch (err) {
             if (err.name !== 'AbortError') {
